@@ -20,7 +20,11 @@ class BatchController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        return view($this->view . 'index');
+        $batches = Batch::latest()->paginate(10);
+        $title = 'Delete Batch!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view($this->view . 'index',compact('batches'));
     }
 
     /**
@@ -98,6 +102,7 @@ class BatchController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.batch.',
+                'url' => 'admin/batch',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

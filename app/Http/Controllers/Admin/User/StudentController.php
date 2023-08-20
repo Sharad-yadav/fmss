@@ -28,7 +28,11 @@ class StudentController extends Controller
         if ($request->wantsJson()) {
             return $this->Datatable();
         }
-        return view($this->view . 'index');
+        $students = Student::latest()->paginate(10);
+        $title = 'Delete Student!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view($this->view . 'index',compact('students'));
         //
     }
 
@@ -147,6 +151,7 @@ class StudentController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.student.',
+                'url' => 'admin/student',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

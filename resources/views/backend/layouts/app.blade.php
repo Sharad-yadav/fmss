@@ -170,6 +170,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{ asset('assets/admin/js') }}/scripts.bundle.js" type="text/javascript"></script>
 <!--Additional Vendors-->
 <script src="{{ asset('assets/admin/js') }}/datatable.bundle.js" type="text/javascript"></script>
+<script src="{{ asset('assets/admin/js') }}/full-calendar.js" type="text/javascript"></script>
+<script src="{{ asset('assets/admin/js') }}/google-calendar.js" type="text/javascript"></script>
 <!--End Additional Vendors-->
 
 @stack('scripts')
