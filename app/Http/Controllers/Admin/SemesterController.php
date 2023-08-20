@@ -20,7 +20,11 @@ class SemesterController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        return view($this->view . 'index');
+        $semesters = Semester::latest()->paginate(10);
+        $title = 'Delete Faculty!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view($this->view . 'index',compact('semesters'));
 
     }
 
@@ -101,6 +105,7 @@ class SemesterController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.semester.',
+                'url' => 'admin/semester',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

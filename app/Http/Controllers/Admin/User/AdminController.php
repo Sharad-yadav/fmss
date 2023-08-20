@@ -23,8 +23,16 @@ class AdminController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        return view($this->view . 'index');
+
+        $admin = Admin::latest()->paginate(10);
+        $title = 'Delete Admin!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+        return view($this->view . 'index',compact('admin'));
     }
+
+   
 
     /**
      * Show the form for creating a new resource.
@@ -125,6 +133,7 @@ class AdminController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.admin.',
+                'url' => 'admin/admin',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

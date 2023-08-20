@@ -20,7 +20,11 @@ class SectionController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        return view($this->view . 'index');
+        $sections = Section::latest()->paginate(10);
+        $title = 'Delete Section!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view($this->view . 'index',compact('sections'));
 
     }
 
@@ -101,6 +105,7 @@ class SectionController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.section.',
+                'url' => 'admin/section',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

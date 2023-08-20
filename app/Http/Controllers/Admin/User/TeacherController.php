@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class TeacherController extends Controller
 {
@@ -19,10 +21,16 @@ class TeacherController extends Controller
      */
     public function index(Request $request)
     {
+
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        return view($this->view . 'index');
+        $teachers = Teacher::latest()->paginate(10);
+        $title = 'Delete Teacher!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+        return view($this->view . 'index', compact('teachers'));
     }
 
     /**
@@ -31,6 +39,7 @@ class TeacherController extends Controller
     public function create()
     {
         $faculties = Faculty::all()->pluck('name', 'id');
+
 
         return view($this->view . 'create', compact('faculties'));
     }
@@ -47,18 +56,28 @@ class TeacherController extends Controller
                 'password' => bcrypt('password')
             ]
         );
+        // $teacherData = $request->validate([
+        //     'name' => 'required|min:3',
+        //     'phone' => 'required|min:3',
+        //     'salary' => 'required|min:3',
+
+        //     'email' => 'required|min:3',
+        // ]);
+
         $teacherData = $request->except(
             [
                 'user',
                 '_token'
             ]
         );
+
+
         DB::beginTransaction();
         $user = User::create($userData);
         $user->teacher()->create($teacherData);
         Db::commit();
 
-        return redirect()->route('admin.teacher.index');
+        return redirect()->route('admin.teacher.index')->with('success', 'user is created successfully');
     }
 
     /**
@@ -114,7 +133,7 @@ class TeacherController extends Controller
         $teacher->delete();
         DB::commit();
 
-        return redirect()->route('admin.teacher.index');
+        return redirect()->route('admin.teacher.index')->with('success', 'user is deleted successfully');
     }
 
     public function dataTable()
@@ -128,6 +147,7 @@ class TeacherController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.teacher.',
+                    'url'=>'admin/teacher',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

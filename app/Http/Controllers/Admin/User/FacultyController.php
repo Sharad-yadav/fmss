@@ -20,7 +20,11 @@ class FacultyController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        return view($this->view . 'index');
+        $faculties = Faculty::latest()->paginate(10);
+        $title = 'Delete Faculty!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view($this->view . 'index',compact('faculties'));
     }
 
     /**
@@ -36,14 +40,14 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'years_to_graduate' => 'required',
+        $request->validate([
+            'name' => 'required|min:3',
+            'years_to_graduate' => 'required'
         ]);
 
-        Faculty::create($data);
+        Faculty::create($request->all());
 
-        return redirect()->route('admin.faculty.index');
+        return redirect()->route('admin.faculty.index')->with('success','faculty created succesfully');
     }
 
     /**
@@ -98,6 +102,7 @@ class FacultyController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.faculty.',
+                'url' => 'admin/faculty',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

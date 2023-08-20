@@ -1,19 +1,26 @@
 @if ($params['is_edit'])
     <a href="{{ route($params['route'] . 'edit', $params['row']->id) }}" class="edit-btn btn btn-primary btn-xs">
         <i class="la la-edit"></i>
+        Edit
     </a>
 @endif
 @if ($params['is_delete'])
-    <form action="{{ route($params['route'] . 'destroy', $params['row']->id) }}" method="POST" class="d-inline" >
+    <a href="{{ route($params['route'] . 'destroy', $params['row']->id) }}" class="delete-btn btn btn-danger btn-xs"
+        data-confirm-delete="true">Delete
+        <i class="la la-trash"></i>
+    </a>
+
+    {{-- <form action="{{ route($params['route'] . 'destroy', $params['row']->id) }}" method="POST" class="d-inline">
         @csrf
         @method('DELETE')
-        <button type="submit" class="delete-btn btn btn-danger btn-xs" >
+        <button type="submit" class="delete-btn btn btn-danger btn-xs" data-confirm-delete="true"  >
             <i class="la la-trash"></i>
         </button>
-    </form>
+    </form> --}}
 @endif
 @if ($params['is_show'])
-    <a href="{{ route($params['route'] . 'show', $params['row']->id) }}" class="edit-btn btn btn-primary btn-xs">
+    <a href="{{ url($params['url'], $params['row']->id) }}" class="edit-btn btn btn-primary btn-xs">
         <i class="la la-eye"></i>
+        view
     </a>
 @endif

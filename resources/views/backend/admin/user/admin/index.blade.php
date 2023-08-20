@@ -46,6 +46,7 @@
                     {data: 'user.name', name: 'user.name'},
                     {data: 'user.email', name: 'user.email'},
                     {data: 'user.number', name: 'user.number'},
+                    {data: 'user.number', name: 'user.number'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
