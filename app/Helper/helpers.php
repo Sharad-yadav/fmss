@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\RoleConstant;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -53,5 +54,15 @@ function getCurrentGuard() {
         if(auth()->guard($guard)->check()){
             return $guard;
         }
+    }
+}
+function getProfileRoute()
+{
+    if (me(getCurrentGuard(), 'role_id') == RoleConstant::ADMIN_ID) {
+        return route('admin.profile.index');
+    } elseif (me(getCurrentGuard(), 'role_id') == RoleConstant::TEACHER_ID) {
+        return route('teacher.profile.index');
+    }elseif(me(getCurrentGuard(), 'role_id')== RoleConstant::STUDENT_ID){
+        return route('student.profile.index');
     }
 }

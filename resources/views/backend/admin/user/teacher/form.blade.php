@@ -1,7 +1,7 @@
 <div class="kt-portlet__body">
     <div class="form-group row">
         <div class="col-lg-6">
-             <label for="">Name</label>
+            <label for="">Name</label>
             {!! Form::text('user[name]', null, ['class' => 'form-control']) !!}
             @error('user.name')
                 {{ $message }}
@@ -11,38 +11,52 @@
             <label for="email">Email</label>
             {!! Form::email('user[email]', null, ['class' => 'form-control']) !!}
             @error('user.email')
-            {{ $message }}
+                {{ $message }}
             @enderror
         </div>
     </div>
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="faculty">Faculty</label>
-            {!! Form::select('faculty_id',$faculties, null, ['class' => 'form-control']) !!}
+            {!! Form::select('faculty_id', $faculties, null, ['class' => 'form-control']) !!}
             @error('faculty_id')
-            {{ $message }}
+                {{ $message }}
             @enderror
         </div>
 
         <div class="col-lg-6">
-             <label for="phone">Phone</label>
-             {!! Form::text('user[number]', null, ['class' => 'form-control']) !!}
-             @error('user.number')
-             {{ $message }}
-             @enderror
-         </div>
+            <label for="phone">Phone</label>
+            {!! Form::text('user[number]', null, ['class' => 'form-control']) !!}
+            @error('user.number')
+                {{ $message }}
+            @enderror
+        </div>
+
     </div>
 
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="password">Salary</label>
-            {!! Form::text('salary', null,  ['class' => 'form-control']) !!}
+            {!! Form::text('salary', null, ['class' => 'form-control']) !!}
             @error('salary')
-            {{ $message }}
+                {{ $message }}
             @enderror
         </div>
     </div>
+    <div class="form-group">
+        <div class="kt-checkbox-inline">
+            <label class="kt-checkbox">
+                <input type="checkbox" value="1">HOD
+                <span></span>
+            </label>
+            <label class="kt-checkbox">
+                <input type="checkbox" value="1">Lab Assistant
+                <span></span>
+            </label>
+        </div>
+    </div>
 </div>
+
 
 <div class="kt-portlet__foot">
     <div class="kt-form__actions">
@@ -54,5 +68,3 @@
         </div>
     </div>
 </div>
-
-

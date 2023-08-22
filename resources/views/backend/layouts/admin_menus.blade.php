@@ -31,15 +31,7 @@
                 <div class="kt-menu__submenu " kt-hidden-height="400" style="">
                     <span class="kt-menu__arrow"></span>
                     <ul class="kt-menu__subnav">
-                        <li class="kt-menu__item " aria-haspopup="true">
-                            <a href="{{ route('admin.admin.index') }}" class="kt-menu__link ">
-                                <span class="kt-menu__link-icon">
-                                    <i class="la la-user">
-                                    </i>
-                                </span>
-                                <span class="kt-menu__link-text">Admin</span>
-                            </a>
-                        </li>
+
                         <li class="kt-menu__item " aria-haspopup="true">
                             <a href="{{ route('admin.teacher.index') }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
@@ -126,7 +118,7 @@
                 </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                <a href="{{ getProfileRoute() }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
                                     <i class="la la-gear">
                                     </i>
