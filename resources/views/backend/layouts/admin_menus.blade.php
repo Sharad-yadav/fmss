@@ -91,7 +91,7 @@
                 </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                <a href="{{ route('admin.subject.index') }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
                                     <i class="la la-book">
                                     </i>
@@ -109,12 +109,12 @@
                 </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                <a href="{{ route('admin.grade.index') }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
                                     <i class="la la-book">
                                     </i>
                                 </span>
-                    <span class="kt-menu__link-text">Assignment</span>
+                    <span class="kt-menu__link-text">Grade</span>
                 </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">

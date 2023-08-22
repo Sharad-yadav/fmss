@@ -13,7 +13,7 @@
             'method' => 'patch',
             'class' => 'kt-form kt-form--label-right',
         ]) !!}
-        @include('$backend.admin.semester.form', ['formAction' => 'Update'])
+        @include('backend.admin.semester.form', ['formAction' => 'Update'])
 
         {!! Form::close() !!}
     </div>

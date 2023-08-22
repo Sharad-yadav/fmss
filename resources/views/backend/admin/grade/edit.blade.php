@@ -8,12 +8,12 @@
                 <h3 class="kt-portlet__head-title">Edit section</h3>
             </div>
         </div>
-        {!! Form::model($section, [
-            'route' => ['admin.section.update', $section->id],
+        {!! Form::model($grade, [
+            'route' => ['admin.garde.update', $grade->id],
             'method' => 'patch',
             'class' => 'kt-form kt-form--label-right',
         ]) !!}
-        @include('backend.admin.section.form', ['formAction' => 'Update'])
+        @include('$backend.admin.grade.form', ['formAction' => 'Update'])
 
         {!! Form::close() !!}
     </div>
