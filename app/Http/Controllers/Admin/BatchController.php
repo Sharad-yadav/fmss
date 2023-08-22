@@ -71,10 +71,7 @@ class BatchController extends Controller
      */
     public function update(Request $request, Batch $batch)
     {
-        $data = $request->validate([
-            'batch_year' => 'required',
-
-        ]);
+        $data = $request->all();
 
         $batch->update($data);
 

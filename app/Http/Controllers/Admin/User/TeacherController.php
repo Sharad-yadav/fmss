@@ -56,13 +56,7 @@ class TeacherController extends Controller
                 'password' => bcrypt('password')
             ]
         );
-        // $teacherData = $request->validate([
-        //     'name' => 'required|min:3',
-        //     'phone' => 'required|min:3',
-        //     'salary' => 'required|min:3',
 
-        //     'email' => 'required|min:3',
-        // ]);
 
         $teacherData = $request->except(
             [
@@ -147,7 +141,7 @@ class TeacherController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'admin.teacher.',
-                    'url'=>'admin/teacher',
+                    'url' => 'admin/teacher',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

@@ -6,7 +6,7 @@ Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class
 Route::resource('teacher', 'User\TeacherController');
 Route::resource('student', 'User\StudentController');
 Route::resource('faculty', 'User\FacultyController');
-Route::resource('admin', 'User\AdminController');
+Route::resource('profile', 'ProfileController');
 Route::resource('batch','BatchController');
 Route::resource('semester','SemesterController');
 Route::resource('section','SectionController');
