@@ -1,7 +1,7 @@
 <div class="kt-portlet__body">
     <div class="form-group row">
         <div class="col-lg-6">
-            <label for="">Name</label>
+            <label for="name">Name</label>
             {!! Form::text('user[name]', null, ['class' => 'form-control']) !!}
             @error('user.name')
                 {{ $message }}
@@ -36,10 +36,11 @@
 
     <div class="form-group row">
         <div class="col-lg-6">
-            <label for="password">Salary</label>
+            <label for="salary">Salary</label>
             {!! Form::text('salary', null, ['class' => 'form-control']) !!}
             @error('salary')
-                {{ $message }}
+
+            {{ $message }}
             @enderror
         </div>
     </div>

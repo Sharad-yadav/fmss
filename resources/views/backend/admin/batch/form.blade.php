@@ -3,7 +3,7 @@
         <div class="col-lg-6">
             <label for="batch_year">Batch</label>
             {!! Form::text('batch_year',$batches->batch_year ?? null, ['class' => 'form-control']) !!}
-            @error('name')
+            @error('batch_year')
             {{ $message }}
             @enderror
         </div>

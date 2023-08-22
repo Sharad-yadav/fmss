@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use App\Http\Controllers\Controller;
-use App\Constants\RoleConstant;
-use App\Models\Batch;
-use App\Models\Section;
-use App\Models\Semester;
-use App\Models\Teacher;
-use Illuminate\Http\Request;
-use App\Models\Student;
 use App\Models\User;
+use App\Models\Batch;
 use App\Models\Faculty;
-use Illuminate\Support\Facades\DB;
+use App\Models\Section;
+use App\Models\Student;
+use App\Models\Teacher;
+use App\Models\Semester;
+use Illuminate\Http\Request;
+use App\Constants\RoleConstant;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentRequest;
 
 
 
@@ -54,32 +55,26 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $userData = array_merge(
-            $request->input('user'),
-            [
-                'role_id' => RoleConstant::STUDENT_ID,
-                'password' => bcrypt('password')
-            ]
-        );
-        $studentData = $request->except(
-            [
-                'user',
-                '_token'
-            ],
+  public function store(StudentRequest $request)
+{
+    // Validate student data
+    $studentData = $request->all();
 
 
-        );
+    $userData = $studentData['user'];
+    $userData['role_id'] = RoleConstant::STUDENT_ID;
+    $userData['password'] = bcrypt('password');
 
 
-        DB::beginTransaction();
-        $user = User::create($userData);
-        $user->student()->create($studentData);
-        Db::commit();
+    DB::beginTransaction();
+    $user = User::create($userData);
+    $studentData['user_id'] = $user->id;
+    Student::create($studentData);
+    DB::commit();
 
-        return redirect()->route('admin.student.index');
-    }
+    return redirect()->route('admin.student.index');
+}
+
 
     /**
      * Display the specified resource.
@@ -109,7 +104,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StudentRequest $request, string $id)
     {
         $student = Student::findOrFail($id);
         $userData = $request->input('user');

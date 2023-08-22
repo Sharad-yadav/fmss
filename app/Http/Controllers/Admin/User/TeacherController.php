@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use App\Constants\RoleConstant;
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Faculty;
 use App\Models\Teacher;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Constants\RoleConstant;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TeacherRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -47,32 +48,23 @@ class TeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
-        $userData = array_merge(
-            $request->input('user'),
-            [
-                'role_id' => RoleConstant::TEACHER_ID,
-                'password' => bcrypt('password')
-            ]
-        );
+       // Validate teacher data
+    $teacherData = $request->all();
 
+    // Extract user data from teacher data
+    $userData = $teacherData['user'];
+    $userData['role_id'] = RoleConstant::TEACHER_ID;
+    $userData['password'] = bcrypt('password'); // You should consider using a more secure method for generating passwords
+    unset($teacherData['user']);
+    DB::beginTransaction();
+    $user = User::create($userData);
+    $user->teacher()->create($teacherData);
+    DB::commit();
 
-        $teacherData = $request->except(
-            [
-                'user',
-                '_token'
-            ]
-        );
-
-
-        DB::beginTransaction();
-        $user = User::create($userData);
-        $user->teacher()->create($teacherData);
-        Db::commit();
-
-        return redirect()->route('admin.teacher.index')->with('success', 'user is created successfully');
-    }
+    return redirect()->route('admin.teacher.index')->with('success', 'user is created successfully');
+}
 
     /**
      * Display the specified resource.
@@ -98,7 +90,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TeacherRequest $request, string $id)
     {
         $teacher = Teacher::findOrFail($id);
         $userData = $request->input('user');
