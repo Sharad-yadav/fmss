@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Batch;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\BatchRequest;
+use App\Http\Controllers\Controller;
 
 class BatchController extends Controller
 {
@@ -38,14 +39,12 @@ class BatchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BatchRequest $request)
     {
-        $data = $request->validate([
-            'batch_year' => 'required',
 
-        ]);
+        $batchData = $request->validated(); // Use validated data
 
-        Batch::create($data);
+    Batch::create($batchData);
 
         return redirect()->route('admin.batch.index');
     }

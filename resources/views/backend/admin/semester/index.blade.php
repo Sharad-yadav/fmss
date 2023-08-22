@@ -5,7 +5,7 @@
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <span class="kt-portlet__head-icon"></span>
-                <h3 class="kt-portlet__head-title">batch Listing</h3>
+                <h3 class="kt-portlet__head-title">Semester Listing</h3>
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-actions">
