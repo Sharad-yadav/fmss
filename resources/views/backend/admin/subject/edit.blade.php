@@ -5,15 +5,15 @@
             <div class="kt-portlet__head-label">
                     <span class="kt-portlet__head-icon">
                     </span>
-                <h3 class="kt-portlet__head-title">Edit section</h3>
+                <h3 class="kt-portlet__head-title">Edit Subject</h3>
             </div>
         </div>
-        {!! Form::model($section, [
-            'route' => ['admin.section.update', $section->id],
+        {!! Form::model($subject, [
+            'route' => ['admin.subject.update', $subject->id],
             'method' => 'patch',
             'class' => 'kt-form kt-form--label-right',
         ]) !!}
-        @include('backend.admin.section.form', ['formAction' => 'Update'])
+        @include('backend.admin.subject.form', ['formAction' => 'Update'])
 
         {!! Form::close() !!}
     </div>

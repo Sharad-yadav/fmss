@@ -28,4 +28,11 @@ class Semester extends Model
         return $this->hasMany(Student::class,'semester_id','id');
 
     }
+    public function grade(): HasMany{
+        return $this->hasMany(Grade::class,'semester_id','id');
+    }
+
+    public function getSemesterAttribute() {
+        return $this->faculty->name.' '.$this->name;
+    }
 }

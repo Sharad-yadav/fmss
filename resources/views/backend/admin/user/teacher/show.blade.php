@@ -27,6 +27,18 @@
                     <p class="form-control-static">{{ $teacher->faculty->name }}</p>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Phone:</label>
+                <div class="col-lg-10">
+                    <p class="form-control-static">{{ $teacher->user->number }}</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Salary:</label>
+                <div class="col-lg-10">
+                    <p class="form-control-static">{{ $teacher->salary }}</p>
+                </div>
+            </div>
             <!-- Add other teacher details here -->
         </div>
     </div>

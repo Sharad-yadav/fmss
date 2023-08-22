@@ -19,4 +19,7 @@ class Section extends Model
     public  function student():HasMany{
         return $this->hasMany( Student::class,'section_id','id');
     }
+    public function grade(): HasMany{
+        return $this->hasMany(Grade::class,'section_id','id');
+    }
 }

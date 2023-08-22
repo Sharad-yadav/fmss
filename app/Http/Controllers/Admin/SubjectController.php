@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Faculty;
 use App\Models\Section;
 use App\Models\Semester;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class SectionController extends Controller
+class SubjectController extends Controller
 {
-    private $view = 'backend.admin.section.';
+    public $view = 'backend.admin.subject.';
     /**
      * Display a listing of the resource.
      */
@@ -20,12 +20,11 @@ class SectionController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        $sections = Section::latest()->paginate(10);
+        $subjects = Subject::latest()->paginate(10);
         $title = 'Delete Section!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view($this->view . 'index',compact('sections'));
-
+        return view($this->view . 'index',compact('subjects'));
     }
 
     /**
@@ -43,61 +42,52 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'semester_id' => 'required',
-            'name' => 'required',
-        ]);
+        Subject::create($request->all());
 
-        Section::create($data);
-
-        return redirect()->route('admin.section.index');
+        return redirect()->route('admin.subject.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Section $section)
+    public function show(Subject $subject)
     {
-        return view($this->view . 'show', compact('section'));
+        return view($this->view . 'show', compact('subject'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Section $section)
+    public function edit(Subject $subject)
     {
-        $semesters = Semester::all()->pluck('name', 'id');
+        $semesters = Semester::all()->pluck('semester', 'id');
 
-        return view($this->view . 'edit', compact('section', 'semesters'));
+        return view($this->view . 'edit', compact('semesters', 'subject'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, Subject $subject)
     {
-        $data = $request->validate([
-            'semester_id' => 'required',
-            'name' => 'required',
-        ]);
+        $subject->update($request->all());
 
-        $section->update($data);
-
-        return redirect()->route('admin.section.index');
+        return redirect()->route('admin.subject.index');
     }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Section $section)
+    public function destroy(Subject $subject)
     {
-        $section->delete();
+        $subject->delete();
 
-        return redirect()->route('admin.section.index');
+        return redirect()->route('admin.subject.index');
     }
     public function datatable()
     {
-        $sections = Section::query()->with('semester.faculty')->select('sections.*');
-        return DataTables::of($sections)
+        $subjects = Subject::query()->with('semester.faculty');
+        return DataTables::of($subjects)
             ->addIndexColumn()
             ->addColumn('semester', function ($row) {
                 return ($row->semester->faculty->name . " ". $row->semester->name) ?? null;
@@ -107,13 +97,13 @@ class SectionController extends Controller
                     'is_edit' => true,
                     'is_delete' => true,
                     'is_show' => true,
-                    'route' => 'admin.section.',
-                'url' => 'admin/section',
+                    'route' => 'admin.subject.',
+                    'url' => 'admin/subject',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));
             })
-            ->rawColumns(['action', 'semestera'])
+            ->rawColumns(['action'])
             ->make(true);
     }
 }

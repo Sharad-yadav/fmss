@@ -10,3 +10,5 @@ Route::resource('profile', 'ProfileController');
 Route::resource('batch','BatchController');
 Route::resource('semester','SemesterController');
 Route::resource('section','SectionController');
+Route::resource('grade','GradeController');
+Route::resource('subject','SubjectController');

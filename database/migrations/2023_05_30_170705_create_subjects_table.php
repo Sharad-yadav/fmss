@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('semester_id');
+            $table->string('code');
             $table->string('name');
+            $table->string('credit_hour');
             $table->softdeletes();
             $table->timestamps();
 
