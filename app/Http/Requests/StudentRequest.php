@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StudentRequest extends FormRequest
 {
@@ -21,26 +24,35 @@ class StudentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+
+        $rules= [
             'user.name'    => 'required|string|max:25',
             'user.email'   => 'required|email|unique:users,email',
-            'user.faculty' => 'required|string|max:25',
-            'user.batch'   => 'required|string|max:25',
-            'user.semester'=> 'required|string|max:25',
-            'user.section' => 'required|string|max:25',
-            'user.phone'   => 'required|string|',
+            'faculty_id' => 'required|string|max:25',
+            'batch_id'   => 'required|string|max:25',
+            'semester_id'=> 'required|string|max:25',
+            'section_id' => 'required|string|max:25',
+            'user.number'   => 'required|string|',
 
 
         ];
+        if($this->method() == 'PATCH') {
+            $student = Student::find($this->route('student'));
+//            dd($student);
+
+            $rules['user.email'] = [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($student->user_id)
+            ];
+        }
+        return $rules;
+
     }
      public function messages() {
         return [
             'user.name.required' => 'The user name is required.',
             'user.email.required' => 'The user email is required.',
-            'user.faculty.required' => 'The user faculty is required.',
-            'user.batch.required' => 'The user batch is required.',
-            'user.semester.required' => 'The semester is required.',
-            'user.section.required' => 'The user section is required.',
             'user.number.required' => 'The user phone is required.'
 
 

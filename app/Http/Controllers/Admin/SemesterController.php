@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SemesterRequest;
 use App\Models\Faculty;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Semester;
 use Illuminate\Support\Facades\DB;
@@ -41,14 +43,10 @@ class SemesterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SemesterRequest $request)
     {
-        $data = $request->validate([
-            'faculty_id' => 'required',
-            'name' => 'required',
-        ]);
+        Semester::create($request->all());
 
-        Semester::create($data);
 
         return redirect()->route('admin.semester.index');
     }
@@ -74,14 +72,9 @@ class SemesterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Semester $semester)
+    public function update(SemesterRequest $request, Semester $semester)
     {
-        $data = $request->validate([
-            'faculty_id' => 'required',
-            'name' => 'required',
-        ]);
-
-        $semester->update($data);
+        Semester::create($request->all());
 
         return redirect()->route('admin.semester.index');
     }
