@@ -294,7 +294,7 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Current Password</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <input type="password" class="form-control" value={{ frontUser('password') }}
+                                                    <input type="password" class="form-control" value=""
                                                         placeholder="Current password">
                                                     <a href="#"
                                                         class="kt-link kt-font-sm kt-font-bold kt-margin-t-5">Forgot
