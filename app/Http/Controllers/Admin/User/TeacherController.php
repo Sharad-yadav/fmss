@@ -54,20 +54,20 @@ class TeacherController extends Controller
     public function store(TeacherRequest $request)
     {
        // Validate teacher data
-    $teacherData = $request->all();
+        $teacherData = $request->all();
 
-    // Extract user data from teacher data
-    $userData = $teacherData['user'];
-    $userData['role_id'] = RoleConstant::TEACHER_ID;
-    $userData['password'] = bcrypt('password'); // You should consider using a more secure method for generating passwords
-    unset($teacherData['user']);
-    DB::beginTransaction();
-    $user = User::create($userData);
-    $user->teacher()->create($teacherData);
-    DB::commit();
+        // Extract user data from teacher data
+        $userData = $teacherData['user'];
+        $userData['role_id'] = RoleConstant::TEACHER_ID;
+        $userData['password'] = bcrypt('password'); // You should consider using a more secure method for generating passwords
+        unset($teacherData['user']);
+        DB::beginTransaction();
+        $user = User::create($userData);
+        $user->teacher()->create($teacherData);
+        DB::commit();
 
-    return redirect()->route('admin.teacher.index')->with('success', 'user is created successfully');
-}
+        return redirect()->route('admin.teacher.index')->with('success', 'user is created successfully');
+    }
 
     /**
      * Display the specified resource.

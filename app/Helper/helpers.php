@@ -66,3 +66,14 @@ function getProfileRoute()
         return route('student.profile.index');
     }
 }
+
+function getTeacherRole() {
+    $teacher = \App\Models\Teacher::where('user_id', frontUser('id'))->first();
+    if($teacher->is_hod) {
+        return \App\Constants\TeacherConstant::HOD_ID;
+    }
+    elseif ($teacher->is_lab) {
+        return \App\Constants\TeacherConstant::LAB_ID;
+    }
+    return \App\Constants\TeacherConstant::TEACHER_ID;
+}

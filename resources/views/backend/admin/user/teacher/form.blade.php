@@ -47,11 +47,11 @@
     <div class="form-group">
         <div class="kt-checkbox-inline">
             <label class="kt-checkbox">
-                <input type="checkbox" value="1">HOD
+                <input type="checkbox" name="is_hod" value=1>HOD
                 <span></span>
             </label>
             <label class="kt-checkbox">
-                <input type="checkbox" value="1">Lab Assistant
+                <input type="checkbox" name="is_lab" value=1>Lab Assistant
                 <span></span>
             </label>
         </div>

@@ -6,7 +6,8 @@
     <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
         <div class="kt-aside__brand-logo">
             <a href="demo1/index.html">
-                <img alt="Logo" src="{{ asset('assets/admin/media') }}/logos/logo-light.png" height="45px" width="45px" />
+                <img alt="Logo" src="{{ asset('assets/admin/media') }}/logos/logo-light.png" height="45px"
+                     width="45px"/>
             </a>
         </div>
         <div class="kt-aside__brand-tools">
@@ -55,11 +56,17 @@
              data-ktmenu-dropdown-timeout="500">
             <ul class="kt-menu__nav ">
                 @if(me(getCurrentGuard(), 'role_id') == \App\Constants\RoleConstant::ADMIN_ID)
-                    @include('backend.layouts.admin_menus')
+                    @include('backend.layouts.menus.admin_menus')
                 @elseif(me(getCurrentGuard(), 'role_id') == \App\Constants\RoleConstant::STUDENT_ID)
-                    @include('backend.layouts.student_menus')
+                    @include('backend.layouts.menus.student_menus')
                 @elseif(me(getCurrentGuard(), 'role_id') == \App\Constants\RoleConstant::TEACHER_ID)
-                    @include('backend.layouts.teacher_menus')
+                    @if(getTeacherRole() == \App\Constants\TeacherConstant::HOD_ID)
+                        @include('backend.layouts.menus.teacher.hod_menus')
+                    @elseif(getTeacherRole() == \App\Constants\TeacherConstant::TEACHER_ID)
+                        @include('backend.layouts.menus.teacher.teacher_menus')
+                    @elseif(getTeacherRole() == \App\Constants\TeacherConstant::LAB_ID)
+                        @include('backend.layouts.menus.teacher.lab_menus')
+                    @endif
                 @endif
             </ul>
         </div>
