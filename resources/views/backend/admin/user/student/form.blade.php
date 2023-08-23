@@ -46,7 +46,7 @@
             <label for="section">Section</label>
             {!! Form::select('section_id', $sections,null, ['class' => 'form-control']) !!}
             @error('section_id')
-            <span class="text-danger">{{ $message }}</span>
+            {{ $message }}
             @enderror
         </div>
     </div>
