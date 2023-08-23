@@ -89,7 +89,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Student $student)
     {
         $faculties = Faculty::all()->pluck('name', 'id');
         $semesters = Semester::all()->pluck('name','id');
@@ -98,7 +98,7 @@ class StudentController extends Controller
         $batches= Batch::all()->pluck('batch_year','id');
         $users= User::all()->pluck('name','id');
 
-        return view($this->view . 'create', compact('faculties','semesters','sections','batches','users'));
+        return view($this->view . 'edit', compact('faculties','semesters','sections','batches','users','student'));
     }
 
     /**
