@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TeacherRequest extends FormRequest
 {
@@ -21,20 +24,35 @@ class TeacherRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'user.name'     => 'required|string|max:25',
-             'user.email'   => 'required|email|unique:users,email',
-             'user.number'  => 'required|string|min:10',
-             'salary'       => 'required|string',
-             'faculty_id'   => 'required'
+            'user.email' => 'required|email|unique:users,email,',
+            'user.number'  => 'required|string|min:10',
+            'salary'       => 'required|string',
+            'faculty_id'   => 'required'
         ];
+        if($this->method() == 'PATCH') {
+            $teacher = Teacher::find($this->route('teacher'));
+
+            $rules['user.email'] = [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($teacher->user_id)
+            ];
+        }
+        return $rules;
 
     }
 
     public function messages() {
         return [
-            'user.name.required' => 'The user name is required.'
+            'user.name.required' => 'The user name is required.',
+            'user.email.required' => 'The user email is required.',
+            'user.number.required' => 'The user number is required.',
+            'salary.required' => 'The  salary is required.'
+
         ];
     }
+
 
 }

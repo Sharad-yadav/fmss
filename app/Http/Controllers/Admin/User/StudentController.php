@@ -55,24 +55,20 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-  public function store(StudentRequest $request)
-{
-    // Validate student data
+     public function store(StudentRequest $request)
+    {
     $studentData = $request->all();
-
 
     $userData = $studentData['user'];
     $userData['role_id'] = RoleConstant::STUDENT_ID;
-    $userData['password'] = bcrypt('password');
-
-
+    $userData['password'] = bcrypt('password'); // You should consider using a more secure method for generating passwords
+    unset($studentData['user']);
     DB::beginTransaction();
     $user = User::create($userData);
-    $studentData['user_id'] = $user->id;
-    Student::create($studentData);
+    $user->teacher()->create($studentData);
     DB::commit();
 
-    return redirect()->route('admin.student.index');
+    return redirect()->route('admin.student.index')->with('success', 'user is created successfully');
 }
 
 

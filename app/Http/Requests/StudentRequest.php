@@ -24,13 +24,10 @@ class StudentRequest extends FormRequest
         return [
             'user.name'    => 'required|string|max:25',
             'user.email'   => 'required|email|unique:users,email',
-
             'user.faculty' => 'required|string|max:25',
             'user.batch'   => 'required|string|max:25',
             'user.semester'=> 'required|string|max:25',
-
             'user.section' => 'required|string|max:25',
-
             'user.phone'   => 'required|string|',
 
 
@@ -38,7 +35,17 @@ class StudentRequest extends FormRequest
     }
      public function messages() {
         return [
-            'user.name.required' => 'The user name is required.'
+            'user.name.required' => 'The user name is required.',
+            'user.email.required' => 'The user email is required.',
+            'user.faculty.required' => 'The user faculty is required.',
+            'user.batch.required' => 'The user batch is required.',
+            'user.semester.required' => 'The semester is required.',
+            'user.section.required' => 'The user section is required.',
+            'user.number.required' => 'The user phone is required.'
+
+
+
+
         ];
     }
 }

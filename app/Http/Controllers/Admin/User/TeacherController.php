@@ -92,6 +92,7 @@ class TeacherController extends Controller
      */
     public function update(TeacherRequest $request, string $id)
     {
+        
         $teacher = Teacher::findOrFail($id);
         $userData = $request->input('user');
         $teacherData = $request->except(
