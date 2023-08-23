@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('faculty_id');
             $table->string('salary');
+            $table->boolean('is_hod')->default(false);
+            $table->boolean('is_lab')->default(false);
             $table->softdeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->ondelete('cascade');
