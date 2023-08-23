@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\DataTables\Admin\TeachersDataTable;
 use App\Models\User;
 use App\Models\Faculty;
 use App\Models\Teacher;
@@ -18,20 +19,23 @@ class TeacherController extends Controller
 {
     private $view = 'backend.admin.user.teacher.';
     /**
-     * Display a listing of the resource.
+     * @var TeachersDataTable
      */
+    private $teachersDataTable;
+
+    /**
+     * Display a listing of the resource.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse
+     */
+    public function __construct(TeachersDataTable $teachersDataTable)
+    {
+        $this->teachersDataTable = $teachersDataTable;
+    }
+
     public function index(Request $request)
     {
-
-        if ($request->wantsJson()) {
-            return $this->datatable();
-        }
-        $teachers = Teacher::latest()->paginate(10);
-        $title = 'Delete Teacher!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-
-        return view($this->view . 'index', compact('teachers'));
+        return $this->datatable();
     }
 
     /**
@@ -40,7 +44,6 @@ class TeacherController extends Controller
     public function create()
     {
         $faculties = Faculty::all()->pluck('name', 'id');
-
 
         return view($this->view . 'create', compact('faculties'));
     }
@@ -92,7 +95,7 @@ class TeacherController extends Controller
      */
     public function update(TeacherRequest $request, string $id)
     {
-        
+
         $teacher = Teacher::findOrFail($id);
         $userData = $request->input('user');
         $teacherData = $request->except(
@@ -125,21 +128,6 @@ class TeacherController extends Controller
 
     public function dataTable()
     {
-        $teacher = Teacher::query()->with(['user', 'faculty']);
-        return Datatables::of($teacher)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $params = [
-                    'is_edit' => true,
-                    'is_delete' => true,
-                    'is_show' => true,
-                    'route' => 'admin.teacher.',
-                    'url' => 'admin/teacher',
-                    'row' => $row
-                ];
-                return view('backend.datatable.action', compact('params'));
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+        return $this->teachersDataTable->render($this->view.'index');
     }
 }

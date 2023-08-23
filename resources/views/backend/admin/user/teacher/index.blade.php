@@ -19,48 +19,13 @@
             </div>
         </div>
         <div class="kt-portlet__body">
-            <table
-                class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer"
-                id="teacher-table"
-                width="100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Faculty</th>
-                        <th>Phone</th>
-                        <th>Salary</th>
-                        <th style="text-align: center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
+            {!! $dataTable->table() !!}
         </div>
     </div>
 @endsection
 
 @push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var table = $('#teacher-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('admin.teacher.index') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'user.name', name: 'user.name'},
-                    {data: 'user.email', name: 'user.email'},
-                    {data: 'faculty.name', name: 'faculty.name'},
-                    {data: 'user.number', name: 'user.number'},
-                    {data: 'salary', name: 'salary'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
-            });
-        });
-    </script>
+    {!! $dataTable->scripts() !!}
 @endpush
 
 
