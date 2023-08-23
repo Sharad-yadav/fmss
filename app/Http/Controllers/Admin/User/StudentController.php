@@ -65,7 +65,7 @@ class StudentController extends Controller
     unset($studentData['user']);
     DB::beginTransaction();
     $user = User::create($userData);
-    $user->teacher()->create($studentData);
+    $user->student()->create($studentData);
     DB::commit();
 
     return redirect()->route('admin.student.index')->with('success', 'user is created successfully');
