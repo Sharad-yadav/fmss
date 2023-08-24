@@ -21,12 +21,14 @@ class SubjectRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'semester_id'    => 'required|string|max:25',
-            'code'    => 'required|string|max:25',
-            'name'    => 'required|string|max:25',
-            'credit_hour'    => 'required|string|max:25',
+        $subjectId = $this->route('subject'); // Get the subject ID if available
 
+        return [
+            'semester_id' => 'required|string|max:25',
+            'code' => "required|string|max:25|unique:subjects,code,$subjectId,id", // Add the unique rule
+            'name' => "required|string|max:25|unique:subjects,name,$subjectId,id", // Add the unique rule
+            'credit_hour' => 'required|string|max:25',
         ];
     }
+
 }

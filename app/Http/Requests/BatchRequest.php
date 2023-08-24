@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Validation\Rule;
+
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,8 +24,11 @@ class BatchRequest extends FormRequest
     public function rules(): array
     {
         return [
-             'batch_year' => 'required|string',
-
+            'batch_year' => [
+                'required',
+                'string',
+                Rule::unique('batches', 'batch_year'),
+            ],
         ];
     }
 }

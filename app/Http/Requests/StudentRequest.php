@@ -25,16 +25,18 @@ class StudentRequest extends FormRequest
     public function rules(): array
     {
 
-        $rules= [
-            'user.name'    => 'required|string|max:25',
-            'user.email'   => 'required|email|unique:users,email',
-            'faculty_id' => 'required|string|max:25',
-            'batch_id'   => 'required|string|max:25',
-            'semester_id'=> 'required|string|max:25',
-            'section_id' => 'required|string|max:25',
-            'user.number'   => 'required|string|',
-
-
+        $rules = [
+            'user.name'     => 'required|string|max:25',
+            'user.email'    => 'required|email|unique:users,email',
+            'faculty_id'    => 'required|string|max:25',
+            'batch_id'      => 'required|string|max:25',
+            'semester_id'   => 'required|string|max:25',
+            'section_id'    => 'required|string|max:25',
+            'user.number'   => [
+                'required',
+                'string',
+                Rule::unique('users', 'number')
+            ],
         ];
         if($this->method() == 'PATCH') {
             $student = Student::find($this->route('student'));
