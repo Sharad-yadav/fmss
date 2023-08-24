@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                <a href="{{ route('teacher.assignment.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-book">
                         </i>
