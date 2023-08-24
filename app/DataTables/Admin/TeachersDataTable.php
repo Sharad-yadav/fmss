@@ -14,6 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class TeachersDataTable extends DataTable
 {
+    protected array $actions = ['excel', 'pdf', 'print'];
     /**
      * Build the DataTable class.
      *
@@ -69,11 +70,11 @@ class TeachersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id', 'Id'),
-            Column::make('user.name', 'user.name'),
-            Column::make('user.email', 'user.email'),
-            Column::make('faculty.name', 'faculty.name'),
-            Column::make('user.number', 'user.number'),
+            Column::make('id', 'id'),
+            Column::make('user.name', 'user.name')->title('Name'),
+            Column::make('user.email', 'user.email')->title('Email'),
+            Column::make('faculty.name', 'faculty.name')->title('Faculty'),
+            Column::make('user.number', 'user.number')->title('Phone'),
             Column::make('salary', 'salary'),
             Column::computed('action')
                 ->exportable(false)

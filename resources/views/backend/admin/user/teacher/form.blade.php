@@ -33,7 +33,6 @@
         </div>
 
     </div>
-
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="salary">Salary</label>
@@ -57,7 +56,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="kt-portlet__foot">
     <div class="kt-form__actions">

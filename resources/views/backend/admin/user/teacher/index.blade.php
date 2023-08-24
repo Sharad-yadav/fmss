@@ -15,6 +15,10 @@
                         <i class="fa fa-plus"></i>
                         Create
                     </a>
+                    <a href="{{ url('admin/teacher/import') }}" class="btn btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Import
+                    </a>
                 </div>
             </div>
         </div>
