@@ -14,6 +14,7 @@
             <div class="kt-portlet__body">
 
                 <div class="form-group row">
+                    
                     <label class="col-form-label col-lg-3 col-sm-12"> Note Upload</label>
                     <div class="col-lg-4 col-md-9 col-sm-12">
                         <div class="kt-dropzone dropzone m-dropzone--primary dz-clickable"
