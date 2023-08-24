@@ -29,12 +29,8 @@ class StudentController extends Controller
         if ($request->wantsJson()) {
             return $this->Datatable();
         }
-        $students = Student::latest()->paginate(10);
-        $title = 'Delete Student!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-        return view($this->view . 'index',compact('students'));
-        //
+
+        return view($this->view . 'index');
     }
 
     /**

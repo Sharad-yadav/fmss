@@ -20,11 +20,10 @@ class FacultyController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        $faculties = Faculty::latest()->paginate(10);
         $title = 'Delete Faculty!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view($this->view . 'index',compact('faculties'));
+        return view($this->view . 'index');
     }
 
     /**
