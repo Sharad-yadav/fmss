@@ -88,3 +88,16 @@ function getTeacherRole() {
     }
     return \App\Constants\TeacherConstant::TEACHER_ID;
 }
+function getActiveClass(array $routes, $parent=false) {
+    if(in_array(getCurrentRouteName(),$routes)) {
+        if($parent) {
+            return 'kt-menu__item--open';
+        }
+        return 'kt-menu__item--active';
+    }
+    return '';
+}
+
+function getCurrentRouteName() {
+    return request()->route()->getName();
+}
