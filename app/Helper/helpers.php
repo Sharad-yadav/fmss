@@ -66,6 +66,17 @@ function getProfileRoute()
         return route('student.profile.index');
     }
 }
+function getDashInfo(){
+    if(me(getCurrentGuard(),'role_id')== RoleConstant::ADMIN_ID){
+        return ('ADMIN || DASHBOARD');
+    }
+    elseif(me(getCurrentGuard(),'role_id') == RoleConstant::TEACHER_ID){
+        return ('TEACHER || DASHBOARD ');
+    }
+    elseif(me(getCurrentGuard(),'role_id')== RoleConstant::STUDENT_ID){
+        return('STUDENT || DASHBOARD');
+    }
+}
 
 function getTeacherRole() {
     $teacher = \App\Models\Teacher::where('user_id', frontUser('id'))->first();

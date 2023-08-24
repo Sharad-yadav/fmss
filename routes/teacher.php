@@ -12,3 +12,4 @@ Route::resource('profile',ProfileController::class);
 Route::resource('note', NoteController::class);
 
 Route::resource('assignment',AssignmentController::class);
+
