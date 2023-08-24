@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Validation\Rule;
+
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,13 +25,18 @@ class SemesterRequest extends FormRequest
     {
         return [
             'faculty_id'    => 'required|string|max:25',
-            'name'    => 'required|string|max:25',
+            'name' => [
+                'required',
+                'string',
+                'max:25',
+                Rule::unique('semesters', 'name')->where('faculty_id', $this->input('faculty_id')),
+            ],
 
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'The semester is required.',];
+            'name.required' => 'The semester is required.'];
     }
 }

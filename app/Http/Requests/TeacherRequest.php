@@ -27,7 +27,11 @@ class TeacherRequest extends FormRequest
         $rules = [
             'user.name'     => 'required|string|max:25',
             'user.email' => 'required|email|unique:users,email,',
-            'user.number'  => 'required|string|min:10',
+            'user.number'   => [
+                'required',
+                'string',
+                Rule::unique('users', 'number')
+            ],
             'salary'       => 'required|string',
             'faculty_id'   => 'required'
         ];
