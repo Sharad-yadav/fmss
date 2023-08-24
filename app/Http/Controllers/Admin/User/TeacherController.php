@@ -3,16 +3,22 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\DataTables\Admin\TeachersDataTable;
+use App\Exports\TeacherExport;
+use App\Http\Requests\Admin\TeacherImportRequest;
+use App\Imports\TeacherImport;
 use App\Models\User;
 use App\Models\Faculty;
 use App\Models\Teacher;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Constants\RoleConstant;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeacherRequest;
-use RealRashid\SweetAlert\Facades\Alert;
 
 
 class TeacherController extends Controller
@@ -26,7 +32,7 @@ class TeacherController extends Controller
     /**
      * Display a listing of the resource.
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse
      */
     public function __construct(TeachersDataTable $teachersDataTable)
     {
@@ -35,7 +41,7 @@ class TeacherController extends Controller
 
     public function index(Request $request)
     {
-        return $this->datatable();
+        return $this->teachersDataTable->render($this->view.'index');
     }
 
     /**
@@ -126,8 +132,30 @@ class TeacherController extends Controller
         return redirect()->route('admin.teacher.index')->with('success', 'user is deleted successfully');
     }
 
-    public function dataTable()
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function import()
     {
-        return $this->teachersDataTable->render($this->view.'index');
+        return view($this->view.'import');
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse
+     */
+    public function postImport(TeacherImportRequest $request) {
+        try {
+            Excel::import(new TeacherImport, $request->file('file'));
+            return redirect()->route('admin.teacher.index')->with('success', 'user is created successfully');
+        }
+        catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            return view($this->view.'import', compact('failures'));
+        }
+    }
+
+    public function export() {
+        return Excel::download(new TeacherExport, 'import-sample.xlsx');
     }
 }
