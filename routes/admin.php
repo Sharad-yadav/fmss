@@ -15,3 +15,4 @@ Route::resource('semester','SemesterController');
 Route::resource('section','SectionController');
 Route::resource('grade','GradeController');
 Route::resource('subject','SubjectController');
+Route::resource('notice','NoticeController');
