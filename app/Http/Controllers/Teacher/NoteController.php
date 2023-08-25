@@ -6,7 +6,6 @@ use App\Http\Requests\Teacher\NoteRequest;
 use App\Models\Faculty;
 use App\Models\Notes;
 use App\Models\Semester;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Subject;

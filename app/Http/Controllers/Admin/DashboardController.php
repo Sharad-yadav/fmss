@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Batch;
+use App\Models\Faculty;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,6 +20,10 @@ class DashboardController extends Controller
      * @return Application|Factory|View|FoundationApplication
      */
     public function index() {
-        return view('backend.admin.dashboard');
+        $faculties = Faculty::all()->count();
+        $batches = Batch::all()->count();
+        $students = Student::all()->count();
+        $teachers = Teacher::all()->count();
+        return view('backend.admin.dashboard', compact('teachers','students','faculties','batches'));
     }
 }
