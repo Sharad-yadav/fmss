@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Http\Requests\Teacher\NoteRequest;
 use App\Models\Faculty;
 use App\Models\Notes;
 use App\Models\Semester;
@@ -47,7 +48,7 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NoteRequest $request)
     {
         $storeData =  $request->all();
         $storeData['user_id'] = frontUser('id');
@@ -79,7 +80,7 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NoteRequest $request, string $id)
     {
         //
     }

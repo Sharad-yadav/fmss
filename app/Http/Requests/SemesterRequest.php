@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
+use App\Models\Semester;
+
 
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,15 +25,25 @@ class SemesterRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'faculty_id' => 'required|string|max:25|unique:faculties,' . $this->route('semester'),
+            $semesterId = $this->route('semester'); // Assuming 'semester' is the route parameter name
+
+         return [
+             'faculty_id' => [
+                 'required',
+                 'string',
+                 'max:25',
+
+             ],
             'name' => [
                 'required',
                 'string',
                 'max:25',
+                'unique:semesters,name,' . $semesterId,
+
             ],
 
         ];
+
 
     }
     public function messages()
