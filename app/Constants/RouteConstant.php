@@ -37,5 +37,35 @@ class RouteConstant
         'admin.faculty.edit',
         'admin.faculty.show',
     ];
+    const AdminBatch = [
+        'admin.batch.index',
+        'admin.batch.create',
+        'admin.batch.edit',
+        'admin.batch.show',
+    ];
+    const AdminSemester =[
+        'admin.semester.index',
+        'admin.semester.create',
+        'admin.semester.edit',
+        'admin.semester.show',
+    ];
+    const AdminSection =[
+        'admin.section.index',
+        'admin.section.create',
+        'admin.section.edit',
+        'admin.section.show',
+    ];
+    const AdminSubject =[
+        'admin.subject.index',
+        'admin.subject.create',
+        'admin.subject.edit',
+        'admin.subject.show',
+    ];
 
+    const AdminNotice =[
+        'admin.notice.index',
+        'admin.notice.create',
+        'admin.notice.edit',
+        'admin.notice.show',
+    ];
 }
