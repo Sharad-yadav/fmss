@@ -1,4 +1,7 @@
 @extends('backend.layouts.app')
+@push('style')
+    <link href="{{ asset('assets/admin/css') }}/select2.css" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
     <div class="kt-portlet">
         <div class="kt-portlet__head">
@@ -13,3 +16,28 @@
         {!! Form::close() !!}
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/admin/js') }}/select2.full.js" type="text/javascript"></script>
+    <script src="{{ asset('assets/teacher/js') }}/subject.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function(){
+            $('#faculty').select2({
+                placeholder: {
+                    id: '-1', // the value of the option
+                    text: 'Select Faculty'
+                },
+                allowClear: true,
+            });
+            $('#semester').select2({
+                placeholder: 'Select Semester',
+                allowClear: true,
+            });
+            $('#subject').select2({
+                placeholder: 'Select Semester',
+                allowClear: true,
+            });
+        })
+    </script>
+@endpush
+

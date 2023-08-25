@@ -18,3 +18,16 @@
         {!! Form::close() !!}
     </div>
 @endsection
+@push('scripts')
+    <script>
+        {{--$(document).ready(function () {--}}
+        {{--    var selectedFacultyId = @json($school->province_id ?? null);--}}
+        {{--    var selectedDistrictId = @json($school->district_id ?? null);--}}
+        {{--    var selectedDistrict = @json(getSelectedDistrict($school->district_id ?? null));--}}
+        {{--    var selectedMunicipality = @json(getSelectedMunicipality($school->municipality_id ?? null));--}}
+        {{--    getSemesterByFaculty(selectedProvinceId, selectedDistrict);--}}
+        {{--    getSubjectBySemester(selectedDistrictId, selectedMunicipality);--}}
+        {{--});--}}
+    </script>
+    <script src="{{ asset('assets/teacher/js') }}/subject.js" type="text/javascript"></script>
+@endpush
