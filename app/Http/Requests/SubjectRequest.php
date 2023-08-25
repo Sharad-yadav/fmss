@@ -26,7 +26,7 @@ class SubjectRequest extends FormRequest
         return [
             'semester_id' => 'required|string|max:25',
             'code' => "required|string|max:25|unique:subjects,code,$subjectId,id", // Add the unique rule
-            'name' => "required|string|max:25|unique:subjects,name,$subjectId,id", // Add the unique rule
+            'name' => "required|string|max:50|unique:subjects,name,$subjectId,id", // Add the unique rule
             'credit_hour' => 'required|string|max:25',
         ];
     }

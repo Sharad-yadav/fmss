@@ -99,10 +99,8 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TeacherRequest $request, string $id)
+    public function update(TeacherRequest $request, Teacher $teacher)
     {
-
-        $teacher = Teacher::findOrFail($id);
         $userData = $request->input('user');
         $teacherData = $request->except(
             [

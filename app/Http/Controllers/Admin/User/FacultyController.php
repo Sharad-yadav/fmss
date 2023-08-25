@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FacultyRequest;
 use Illuminate\Http\Request;
 use App\Models\Faculty;
 use Illuminate\Support\Facades\DB;
@@ -37,13 +38,9 @@ class FacultyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FacultyRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'years_to_graduate' => 'required'
-        ]);
-
+//        dd($request->all());
         Faculty::create($request->all());
 
         return redirect()->route('admin.faculty.index')->with('success','faculty created succesfully');
@@ -68,14 +65,9 @@ class FacultyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Faculty $faculty)
+    public function update(FacultyRequest $request, Faculty $faculty)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'years_to_graduate' => 'required',
-        ]);
-
-        $faculty->update($data);
+        $faculty->update($request->all());
 
         return redirect()->route('admin.faculty.index');
     }
