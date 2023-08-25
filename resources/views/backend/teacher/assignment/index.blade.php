@@ -1,49 +1,60 @@
 @extends('backend.layouts.app')
+
 @section('content')
     <div class="kt-portlet">
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
-                <h3 class="kt-portlet__head-title">
-                    Upload Assignment
-                </h3>
+                <span class="kt-portlet__head-icon"></span>
+                <h3 class="kt-portlet__head-title">Assignments Listing</h3>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+                <div class="kt-portlet__head-actions">
+                    <a href="{{ route('teacher.assignment.create') }}" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Create
+                    </a>
+                </div>
             </div>
         </div>
+        <div class="kt-portlet__body">
+            <table class="table table-striped table-bordered table-hover dataTable no-footer" id="assignment-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Faculty</th>
+                    <th>Teacher</th>
+                    <th>Semester</th>
+                    <th>Subject</th>
+                    <th>Assignments</th>
+                    <th>Submission Date</th>
+                    <th style="text-align: center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
 
-        <!--begin::Form-->
-        <form class="kt-form kt-form--label-right">
-            <div class="kt-portlet__body">
-
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-3 col-sm-12"> Assignment Upload</label>
-                    <div class="col-lg-4 col-md-9 col-sm-12">
-                        <div class="kt-dropzone dropzone m-dropzone--primary dz-clickable"
-                            action="inc/api/dropzone/upload.php" id="m-dropzone-two">
-                            <div class="kt-dropzone__msg dz-message needsclick">
-                                <h3 class="kt-dropzone__msg-title">Drop files here or click to upload.</h3>
-                                <span class="kt-dropzone__msg-desc">Upload up to 10 files</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="kt-portlet__foot">
-                <div class="kt-form__actions">
-                    <div class="row">
-                        <div class="col-lg-9 ml-lg-auto">
-                            <button type="reset" class="btn btn-brand">Submit</button>
-                            <button type="reset" class="btn btn-secondary">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <!--end::Form-->
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/admin/js') }}/main-dropzone.min.js" type="text/javascript"></script>
-    <script src="{{ asset('assets/admin/js') }}/dropzone.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var table = $('#assignment-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('teacher.assignment.index') }}",
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'subject.semester.faculty.name', name: 'subject.semester.faculty.name' },
+                    { data: 'teacher.user.name', name: 'teacher.user.name' },
+                    { data: 'subject.semester.name', name: 'subject.semester.name' },
+                    { data: 'subject.name', name: 'subject.name' },
+                    {data: 'assignments', name: 'assignments'},
+                    { data: 'submission_date', name: 'submission_date' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false },
+                ]
+            });
+        });
+    </script>
 @endpush

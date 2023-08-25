@@ -70,7 +70,7 @@
                         </div>
                         <div class="kt-widget__body">
                             <span class="kt-widget__text kt-margin-t-0 kt-padding-t-5">
-                                Students assignment submission progress.
+                                Latest Assignments.
                             </span>
                             <div class="kt-widget__stats kt-margin-t-20">
                                 <div class="kt-widget__item d-flex align-items-center kt-margin-r-30">
@@ -444,7 +444,7 @@
                                         Satus
                                     </span>
                                     <div class="kt-widget__label">
-                                        
+
                                     </div>
                                 </div>
                             </div>
