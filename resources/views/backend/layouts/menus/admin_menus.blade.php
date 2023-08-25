@@ -93,7 +93,7 @@
                 </a>
             </li>
             <li class="kt-menu__item {{ getActiveClass(\App\Constants\RouteConstant::AdminNotice) }} " aria-haspopup="true">
-                <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                <a href="{{ route('admin.notice.index') }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
                                     <i class="la la-book">
                                     </i>
