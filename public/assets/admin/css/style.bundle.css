@@ -21818,7 +21818,7 @@ td > .kt-radio.kt-radio--single {
 .select2-container--default .select2-selection--single .select2-selection__rendered .select2-selection__clear {
     border: 0;
     position: absolute;
-    top: 50%;
+    top: 38%;
     font-family: "LineAwesome";
     text-decoration: inherit;
     text-rendering: optimizeLegibility;

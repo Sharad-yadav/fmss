@@ -38,11 +38,9 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::pluck("name", "id");
         $faculties = Faculty::pluck('name', "id");
-        $semesters = Semester::pluck('name', 'id');
 
-        return view($this->view . 'create', compact('semesters', 'faculties', 'subjects'));
+        return view($this->view . 'create', compact('faculties'));
     }
 
     /**

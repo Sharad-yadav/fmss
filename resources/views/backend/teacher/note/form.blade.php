@@ -2,14 +2,14 @@
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="semester">Faculty</label>
-            {!! Form::select('faculty_id', $faculties, null, ['class' => 'form-control']) !!}
+            {!! Form::select('faculty_id', $faculties, null, ['class' => 'form-control', 'id' => 'faculty']) !!}
             @error('faculty_id')
             {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="semester">Semester</label>
-            {!! Form::select('semester_id', $semesters, null, ['class' => 'form-control']) !!}
+            {!! Form::select('semester_id', [], null, ['class' => 'form-control kt-select2', 'id' => 'semester']) !!}
             @error('semester_id')
             {{ $message }}
             @enderror
@@ -18,7 +18,7 @@
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="subject"> Subject Name</label>
-            {!! Form::select('subject_id',$subjects, null, ['class' => 'form-control']) !!}
+            {!! Form::select('subject_id',[], null, ['class' => 'form-control', 'id' => 'subject']) !!}
             @error('subject_id')
             {{ $message }}
             @enderror
