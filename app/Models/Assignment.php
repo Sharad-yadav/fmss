@@ -19,7 +19,7 @@ class Assignment extends Model
     public function teacher(): BelongsTo{
         return $this->belongsTo(Teacher::class,'teacher_id','id');
     }
-    public function assignment_submission(): HasMany{
+    public function submissions(): HasMany{
         return $this->hasMany(AssignmentSubmission::class,'assignment_id','id');
     }
 }

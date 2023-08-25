@@ -16,7 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('teacher_id');
             $table->string('file');
-            $table->string('submission');
+            $table->string('assignments');
+            $table->date('submission_date');
             $table->softdeletes();
             $table->timestamps();
 
