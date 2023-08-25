@@ -74,7 +74,7 @@ class SemesterController extends Controller
      */
     public function update(SemesterRequest $request, Semester $semester)
     {
-        Semester::create($request->all());
+        $semester->update($request->all());
 
         return redirect()->route('admin.semester.index');
     }

@@ -36,12 +36,11 @@ class TeacherRequest extends FormRequest
             'faculty_id'   => 'required'
         ];
         if($this->method() == 'PATCH') {
-            $teacher = Teacher::find($this->route('teacher'));
 
             $rules['user.email'] = [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($teacher->user_id)
+                Rule::unique('users', 'email')->ignore($this->route('teacher')->user_id)
             ];
         }
         return $rules;

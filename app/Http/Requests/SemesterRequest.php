@@ -24,15 +24,15 @@ class SemesterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'faculty_id'    => 'required|string|max:25',
+            'faculty_id' => 'required|string|max:25|unique:faculties,' . $this->route('semester'),
             'name' => [
                 'required',
                 'string',
                 'max:25',
-                Rule::unique('semesters', 'name')->where('faculty_id', $this->input('faculty_id')),
             ],
 
         ];
+
     }
     public function messages()
     {
