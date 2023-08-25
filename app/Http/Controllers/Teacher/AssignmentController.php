@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Models\Assignment;
+use App\Models\Batch;
 use App\Models\Faculty;
+use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Semester;
 use App\Models\Teacher;
@@ -40,8 +42,10 @@ class AssignmentController extends Controller
         $subjects = Subject::pluck("name", "id");
         $faculties = Faculty::pluck('name', "id");
         $semesters = Semester::pluck('name', 'id');
+        $batches = Batch::pluck('batch_year','id');
+        $sections = Section::pluck('name','id');
 
-        return view($this->view . 'create', compact('semesters', 'faculties', 'subjects'));
+        return view($this->view . 'create', compact('semesters', 'faculties', 'subjects','batches','sections'));
     }
 
     /**
@@ -93,7 +97,7 @@ class AssignmentController extends Controller
     }
     public function datatable()
     {
-        $assignments= Assignment::query()->with(['subject.semester.faculty', 'teacher.user']);
+        $assignments= Assignment::query()->with(['subject', 'section.semester.faculty', 'teacher.user','batch']);
         return DataTables::of($assignments)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
