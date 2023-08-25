@@ -34,13 +34,14 @@ class SemesterRequest extends FormRequest
                  'max:25',
 
              ],
-            'name' => [
-                'required',
-                'string',
-                'max:25',
-                'unique:semesters,name,' . $semesterId,
-
-            ],
+             'name' => [
+                 'required',
+                 'string',
+                 'max:25',
+                 Rule::unique('semesters')->where(function ($query) {
+                     $query->where('faculty_id', $this->input('faculty_id'));
+                 }),
+             ],
 
         ];
 

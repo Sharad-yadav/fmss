@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Http\Requests\Teacher\AssignmentRequest;
 use App\Models\Assignment;
 use App\Models\Batch;
 use App\Models\Faculty;
@@ -51,7 +52,7 @@ class AssignmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AssignmentRequest $request)
     {
         $storeData =  $request->all();
         $user = frontUser()->load('teacher');
@@ -83,7 +84,7 @@ class AssignmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AssignmentRequest $request, string $id)
     {
         //
     }
