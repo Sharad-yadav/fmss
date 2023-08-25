@@ -16,10 +16,17 @@ class Assignment extends Model
     public function subject(): BelongsTo{
         return $this->belongsTo(Subject::class,'subject_id','id');
     }
+
+    public function section(): BelongsTo{
+        return $this->belongsTo(Section::class,'section_id','id');
+    }
     public function teacher(): BelongsTo{
         return $this->belongsTo(Teacher::class,'teacher_id','id');
     }
     public function submissions(): HasMany{
         return $this->hasMany(AssignmentSubmission::class,'assignment_id','id');
+    }
+    public function batch(): BelongsTo{
+        return $this->belongsTo(Batch::class,'batch_id','id');
     }
 }

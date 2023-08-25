@@ -20,9 +20,11 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Batch</th>
                     <th>Faculty</th>
                     <th>Teacher</th>
                     <th>Semester</th>
+                    <th>Section</th>
                     <th>Subject</th>
                     <th>Assignments</th>
                     <th>Submission Date</th>
@@ -46,9 +48,11 @@
                 ajax: "{{ route('teacher.assignment.index') }}",
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'subject.semester.faculty.name', name: 'subject.semester.faculty.name' },
+                    {data: 'batch.batch_year', name: 'batch.batch_year'},
+                    { data: 'section.semester.faculty.name', name: 'section.semester.faculty.name' },
                     { data: 'teacher.user.name', name: 'teacher.user.name' },
-                    { data: 'subject.semester.name', name: 'subject.semester.name' },
+                    {data: 'section.semester.name',name:'section.semester.name'},
+                    { data: 'section.name', name: 'section.name' },
                     { data: 'subject.name', name: 'subject.name' },
                     {data: 'assignments', name: 'assignments'},
                     { data: 'submission_date', name: 'submission_date' },
