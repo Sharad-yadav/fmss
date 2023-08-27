@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\DataTables\Admin\StudentsDataTable;
+use App\Exports\StudentExport;
+use App\Http\Requests\Admin\StudentImportRequest;
+use App\Imports\StudentImport;
 use App\Models\User;
 use App\Models\Faculty;
 use App\Models\Student;
@@ -11,6 +14,7 @@ use App\Models\Semester;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Constants\RoleConstant;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -32,7 +36,7 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        return $this->datatable();
+        return $this->studentsDataTable->render($this->view.'index');
     }
 
     public function create()
@@ -107,9 +111,23 @@ class StudentController extends Controller
 
         return redirect()->route('admin.student.index')->with('success', 'Student deleted successfully');
     }
-
-    public function datatable()
+    public function import()
     {
-        return $this->studentsDataTable->render($this->view . 'index');
+        return view($this->view.'import');
+    }
+
+    public function postImport(StudentImportRequest $request) {
+        try {
+            Excel::import(new StudentImport(), $request->file('file'));
+            return redirect()->route('admin.student.index')->with('success', 'user is created successfully');
+        }
+        catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            return view($this->view.'import', compact('failures'));
+        }
+    }
+
+    public function export() {
+        return Excel::download(new StudentExport, 'import-sample.xlsx');
     }
 }
