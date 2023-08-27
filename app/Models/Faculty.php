@@ -25,4 +25,7 @@ class Faculty extends Model
     public function grade(): HasMany{
         return $this->hasMany(Grade::class,'faculty_id','id');
     }
+    public function syllabi(): HasMany{
+        return $this->hasMany(Syllabus::class,'faculty_id','id');
+    }
 }

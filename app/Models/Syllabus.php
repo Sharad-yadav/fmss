@@ -15,6 +15,15 @@ class Syllabus extends Model
 public function subject():BelongsTo{
     return $this->belongsTo(Subject::class,'subject_id','id');
 }
+    public function semester():BelongsTo{
+        return $this->belongsTo(Semester::class,'semester_id','id');
+    }
+    public function faculty():BelongsTo{
+        return $this->belongsTo(Faculty::class,'faculty_id','id');
+    }
+    public function batch():BelongsTo{
+        return $this->belongsTo(Batch::class,'batch_id','id');
+    }
 
 }
 

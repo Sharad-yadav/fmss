@@ -13,7 +13,7 @@
             </li>
 {{--            @if(getTeacherRole() == \App\Constants\TeacherConstant::HOD_ID || getTeacherRole() == \App\Constants\TeacherConstant::TEACHER_ID)--}}
                 <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                    <a href="{{ route('teacher.note.index') }}" class="kt-menu__link ">
                         <span class="kt-menu__link-icon">
                             <i class="la la-book">
                             </i>
@@ -23,7 +23,7 @@
                 </li>
 
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                <a href="{{ route('teacher.assignment.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-book">
                         </i>
@@ -33,7 +33,7 @@
             </li>
 
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('admin.semester.index') }}" class="kt-menu__link ">
+                <a href="{{ route('admin.notice.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-list-ul">
                         </i>
@@ -42,7 +42,7 @@
                 </a>
             </li>
 
-           
+
             <li class="kt-menu__item " aria-haspopup="true">
                 <a href="{{ getProfileRoute() }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">

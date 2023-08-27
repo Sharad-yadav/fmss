@@ -12,6 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class StudentsDataTable extends DataTable
 {
+    protected array $actions = ['excel', 'pdf', 'print'];
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
@@ -54,12 +55,13 @@ class StudentsDataTable extends DataTable
     {
         return [
             Column::make('id', 'ID'),
-            Column::make('user.name', 'user.name'),
-            Column::make('user.email', 'user.email'),
-            Column::make('faculty.name', 'faculty.name'),
-            Column::make('batch.batch_year', 'batch.batch_year'),
-            Column::make('semester.name', 'semester.name'),
-            Column::make('section.name', 'section.name'),
+            Column::make('user.name', 'user.name')->title('Name'),
+            Column::make('user.email', 'user.email')->title('Email'),
+            Column::make('faculty.name', 'faculty.name')->title('Faculty'),
+            Column::make('batch.batch_year', 'batch.batch_year')->title('Batch_Year'),
+            Column::make('semester.name', 'semester.name')->title('Semester'),
+            Column::make('section.name', 'section.name')->title('Section'),
+            Column::make('user.number','user.number')->title('phone'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

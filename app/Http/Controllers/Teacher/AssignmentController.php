@@ -12,6 +12,7 @@ use App\Models\Semester;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
@@ -27,12 +28,10 @@ class AssignmentController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        $assignments = Assignment::latest()->paginate(10);
-        $title = 'Delete Note!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
 
-        return view($this->view . 'index',compact('assignments'));
+
+
+        return view($this->view . 'index');
     }
 
     /**

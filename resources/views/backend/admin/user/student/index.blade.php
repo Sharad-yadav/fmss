@@ -12,6 +12,10 @@
                     <a href="{{ route('admin.student.create') }}" class="btn btn-primary">
                         <i class="fa fa-plus"></i> Create
                     </a>
+                    <a href="{{ url('admin/student/import') }}" class="btn btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Import
+                    </a>
                 </div>
             </div>
         </div>

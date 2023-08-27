@@ -92,6 +92,15 @@
                     <span class="kt-menu__link-text">Subject</span>
                 </a>
             </li>
+            <li class="kt-menu__item {{ getActiveClass(\App\Constants\RouteConstant::AdminSyllabus) }}" aria-haspopup="true">
+                <a href="{{ route('admin.syllabus.index') }}" class="kt-menu__link ">
+                                <span class="kt-menu__link-icon">
+                                    <i class="la la-book">
+                                    </i>
+                                </span>
+                    <span class="kt-menu__link-text">Syllabus</span>
+                </a>
+            </li>
             <li class="kt-menu__item {{ getActiveClass(\App\Constants\RouteConstant::AdminNotice) }} " aria-haspopup="true">
                 <a href="{{ route('admin.notice.index') }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
@@ -110,14 +119,15 @@
                     <span class="kt-menu__link-text">Grade</span>
                 </a>
             </li>
-{{--            <li class="kt-menu__item " aria-haspopup="true">--}}
-{{--                <a href="{{ getProfileRoute() }}" class="kt-menu__link ">--}}
-{{--                                <span class="kt-menu__link-icon">--}}
-{{--                                    <i class="la la-gear">--}}
-{{--                                    </i>--}}
-{{--                                </span>--}}
-{{--                    <span class="kt-menu__link-text">Settings</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+
+            <li class="kt-menu__item " aria-haspopup="true">
+                <a href="{{ getProfileRoute() }}" class="kt-menu__link ">
+                                <span class="kt-menu__link-icon">
+                                    <i class="la la-gear">
+                                    </i>
+                                </span>
+                    <span class="kt-menu__link-text">Settings</span>
+                </a>
+            </li>
     </div>
 </div>

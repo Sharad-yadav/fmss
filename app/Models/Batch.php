@@ -19,4 +19,8 @@ class Batch extends Model
     public function grade(): HasMany{
         return $this->hasMany(Grade::class,'batch_id','id');
     }
+    public function syllabi(): HasMany{
+        return $this->hasMany(Syllabus::class,'batch_id','id');
+    }
+
 }
