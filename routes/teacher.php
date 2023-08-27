@@ -1,15 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\NoticeController;
-
 use App\Http\Controllers\Teacher\AssignmentController;
 use App\Models\Semester;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Teacher\NoteController;
-use App\Http\Controllers\Teacher\NoticeController as TeacherNoticeController;
 use App\Http\Controllers\Teacher\ProfileController;
-use App\Http\Controllers\Teacher\StudentController;
 
 Route::get('/dashboard', [\App\Http\Controllers\Teacher\DashboardController::class, 'index'])->name('dashboard');
 
@@ -18,6 +14,8 @@ Route::resource('profile',ProfileController::class);
 Route::resource('note', NoteController::class);
 
 Route::resource('assignment',AssignmentController::class);
+
+Route::resource('leave',\App\Http\Controllers\Teacher\LeaveController::class);
 
 Route::resource('notice',TeacherNoticeController::class);
 

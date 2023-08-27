@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->id('id');
-            $table->unsignedBigInteger('leave_type_id');
-            $table->unsignedBigInteger('teacher_id');
-            $table->unsignedBigInteger('student_id');
+            $table->string('leave_type');
+            $table->string('file');
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->softdeletes();
             $table->timestamps();
 
-            $table->foreign('leave_type_id')->references('id')->on('leave_types')->ondelete('cascade');
+
             $table->foreign('teacher_id')->references('id')->on('teachers')->ondelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->ondelete('cascade');
         });

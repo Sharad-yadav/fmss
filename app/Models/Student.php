@@ -32,6 +32,9 @@ public function semester(): BelongsTo{
 public function section(): BelongsTo{
         return  $this->belongsTo(Section::class,'section_id','id');
 }
+public function leaves():HasMany{
+        return $this->hasMany(Leave::class,'student_id','id');
+}
 
     
 
