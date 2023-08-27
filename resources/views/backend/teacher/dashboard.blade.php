@@ -218,7 +218,7 @@
                             <div class="kt-widget__label">
                                 <div class="kt-widget__media kt-widget__media--m">
                                     <span class="kt-userpic kt-userpic--md kt-userpic--circle kt-hidden-">
-                                        <img src="{{ asset('assets/admin/img/notice1.png') }}" alt="image">
+                                        <img src="{{ asset('assets/admin/img/notice.png') }}" alt="image">
                                     </span>
                                     <span class="kt-userpic kt-userpic--md kt-userpic--circle kt-hidden">
                                         <img src="./assets/media/users/100_12.jpg" alt="image">
@@ -229,13 +229,12 @@
                                         Notice
                                     </a>
                                     <span class="kt-widget__desc">
-                                        List of Notice
+                                        Your Notices
                                     </span>
                                 </div>
                             </div>
                             <div class="kt-widget__toolbar">
-                                <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md"
-                                    data-toggle="dropdown">
+                                <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown">
                                     <i class="flaticon-more-1"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
@@ -276,43 +275,28 @@
                         </div>
                         <div class="kt-widget__body">
                             <span class="kt-widget__text kt-margin-t-0 kt-padding-t-5">
-                                All the students available in class
+                                Latest Notices.
                             </span>
-                            <div class="kt-widget__stats kt-margin-t-20">
-                                <div class="kt-widget__item d-flex align-items-center kt-margin-r-30">
-                                    <span class="kt-widget__date kt-padding-0 kt-margin-r-10">
-                                        Start
-                                    </span>
-                                    <div class="kt-widget__label">
-                                        <span class="btn btn-label-brand btn-sm btn-bold btn-upper">20 aug, 18</span>
-                                    </div>
-                                </div>
-                                <div class="kt-widget__item d-flex align-items-center kt-padding-l-0">
-                                    <span class="kt-widget__date kt-padding-0 kt-margin-r-10 ">
-                                        Due
-                                    </span>
-                                    <div class="kt-widget__label">
-                                        <span class="btn btn-label-danger btn-sm btn-bold btn-upper">07 dec, 18</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="kt-widget__container">
-                                <span class="kt-widget__subtitel">Progress</span>
-                                <div class="kt-widget__progress d-flex align-items-center flex-fill">
-                                    <div class="progress" style="height: 15px;width: 100%;">
-                                        <div class="progress-bar kt-bg-success" role="progressbar" style="width: 92%;"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="kt-widget__stat">
-                                        92%
-                                    </span>
-                                </div>
-                            </div>
+                            @forelse( $notices as $notice)
+                                <span class="kt-widget__text kt-margin-t-0 kt-padding-t-5">
+                                    <a href="{{ \Illuminate\Support\Facades\Storage::url($notice->file) }}">
+                                        {{ $notice->notices }}
+                                    </a>
+                                </span>
+                            @empty
+                                <span class="kt-widget__subtitel">No Notices
+                                </span>
+                            @endforelse
                         </div>
                         <div class="kt-widget__footer">
                             <div class="kt-widget__wrapper">
-                                <div class="kt-widget__section">
-
+                                <div class="flex justify-center">
+                                    @if ($notices->count())
+                                        <a href="{{ route('teacher.notice.index') }}"
+                                            class="btn btn-label btn-label-brand btn-lg btn-bold">
+                                            View all
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

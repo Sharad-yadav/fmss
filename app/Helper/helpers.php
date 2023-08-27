@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\RoleConstant;
+use App\Constants\TeacherConstant;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -100,4 +101,35 @@ function getActiveClass(array $routes, $parent=false) {
 
 function getCurrentRouteName() {
     return request()->route()->getName();
+}
+
+function getStudentData()
+{
+    if(me(getCurrentGuard(),'teacher_id') == TeacherConstant::HOD_ID){
+        return function ($row) {
+            $params = [
+                'is_edit' => true,
+                'is_delete' => true,
+                'is_show' => true,
+                'route' => 'admin.student.',
+                'url' => 'admin/student',
+                'row' => $row,
+            ];
+            return view('backend.datatable.action', compact('params'));
+    };
+
+ }elseif(me(getCurrentGuard(),'role_id') == RoleConstant::ADMIN_ID){
+    return
+        function ($row) {
+            $params = [
+                'is_edit' => true,
+                'is_delete' => true,
+                'is_show' => true,
+                'route' => 'admin.student.',
+                'url' => 'admin/student',
+                'row' => $row,
+            ];
+            return view('backend.datatable.action', compact('params'));
+        };
+ };
 }

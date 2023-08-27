@@ -33,12 +33,22 @@
             </li>
 
             <li class="kt-menu__item " aria-haspopup="true">
+                <a href="{{ route('teacher.notice.index') }}" class="kt-menu__link ">
                 <a href="{{ route('admin.notice.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-list-ul">
                         </i>
                     </span>
                     <span class="kt-menu__link-text">Notice</span>
+                </a>
+            </li>
+            <li class="kt-menu__item " aria-haspopup="true">
+                <a href="{{ route('teacher.student.index') }}" class="kt-menu__link ">
+                    <span class="kt-menu__link-icon">
+                        <i class="la la-list-ul">
+                        </i>
+                    </span>
+                    <span class="kt-menu__link-text">Student</span>
                 </a>
             </li>
 

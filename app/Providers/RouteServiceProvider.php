@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware(['web', 'auth', 'teacher'])->prefix('teacher')->as('teacher.')
                 ->group(base_path('routes/teacher.php'));
+
         });
     }
 }

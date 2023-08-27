@@ -12,7 +12,7 @@ class Teacher extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
 
     protected $guarded = [
         'id'
@@ -43,4 +43,8 @@ class Teacher extends Model
     {
         return $this->hasMany(Assignment::class, 'teacher_id', 'id');
     }
+
+    
+
+
 }
