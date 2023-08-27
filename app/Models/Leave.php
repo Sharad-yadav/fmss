@@ -19,8 +19,9 @@ class Leave extends Model
     public  function teacher(): BelongsTo{
         return $this->belongsTo(Teacher::class,'teacher_id','id');
     }
-    public function students(): BelongsTo{
+    public function student(): BelongsTo{
         return $this->belongsTo(Student::class,'student_id','id');
     }
+
 }
 

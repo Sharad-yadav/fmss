@@ -18,8 +18,8 @@ class Semester extends Model
     public function faculty(): BelongsTo{
         return $this->belongsTo(Faculty::class,'faculty_id','id');
     }
-    public function subject(): BelongsTo {
-        return $this->belongsTo(Subject::class,'semester_id','id');
+    public function subject(): HasMany {
+        return $this->hasMany(Subject::class,'semester_id','id');
     }
     public function section(): HasMany{
         return $this->hasMany(Section::class,'semester_id','id');

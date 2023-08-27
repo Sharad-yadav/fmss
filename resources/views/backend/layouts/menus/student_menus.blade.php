@@ -35,23 +35,20 @@
                         <li class="kt-menu__item " aria-haspopup="true">
                             <a href="{{ route('student.assignment.index') }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
-                                    <i class="la la-book">
+                                    <i class="la la-list-ul">
                                     </i>
                                 </span>
-                                <span class="kt-menu__link-text">Assignment</span>
-                            </a>
-                        </li>
-                        <li class="kt-menu__item " aria-haspopup="true">
-                            <a href="{{ route('student.assignment_upload.index') }}" class="kt-menu__link ">
+                    <span class="kt-menu__link-text">Notice</span>
+                </a>
+            </li>
+            <li class="kt-menu__item " aria-haspopup="true">
+                <a href="{{ route('student.leave.index') }}" class="kt-menu__link ">
                                 <span class="kt-menu__link-icon">
-                                    <i class="la la-book">
+                                    <i class="la la-align-justify">
                                     </i>
                                 </span>
-                                <span class="kt-menu__link-text">Assignment_upload</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                    <span class="kt-menu__link-text">Leave</span>
+                </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">
                 <a href="{{ route('student.notice.index') }}" class="kt-menu__link ">
@@ -61,8 +58,8 @@
                     </span>
                     <span class="kt-menu__link-text">Notice</span>
                 </a>
-            </li>
 
+            </li>
             <li class="kt-menu__item " aria-haspopup="true">
                 <a href="{{ getProfileRoute() }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">

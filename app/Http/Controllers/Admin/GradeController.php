@@ -96,7 +96,7 @@ class GradeController extends Controller
     }
     public function datatable()
     {
-        $grades = Section::query()->with('semester', 'batch', 'faculty', 'section');
+        $grades = Grade::query()->with('semester', 'batch', 'faculty', 'section');
         return DataTables::of($grades)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {

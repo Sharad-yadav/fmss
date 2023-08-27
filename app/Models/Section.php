@@ -22,4 +22,10 @@ class Section extends Model
     public function grade(): HasMany{
         return $this->hasMany(Grade::class,'section_id','id');
     }
+    public function batch(): BelongsTo{
+        return $this->belongsTo(Batch::class,'section_id','id');
+    }
+    public function faculty(): BelongsTo{
+        return $this->belongsTo(Faculty::class,'section_id','id');
+    }
 }

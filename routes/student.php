@@ -9,6 +9,7 @@ use App\Http\Controllers\Student\Assignment_uploadController;
 
 Route::get('/dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('dashboard');
 Route::resource('profile',ProfileController::class);
+Route::resource('leave',\App\Http\Controllers\Student\LeaveController::class);
 
 Route::resource('note',NoteController::class);
 

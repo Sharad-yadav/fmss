@@ -27,7 +27,7 @@ class AssignmentRequest extends FormRequest
                  'semester_id' => 'required','string','max:25',
                  'section_id' => 'required','string','max:25',
                  'subject_id' => 'required','string','max:25',
-                 'name' => 'required','string','max:25',
+//                 'name' => 'required','string','max:25',
                  'submission_date' => 'required','string','max:25',
 
                  'file' => [
