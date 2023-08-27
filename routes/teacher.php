@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Teacher\AssignmentController;
+use App\Http\Controllers\Teacher\LabDashController;
 use App\Models\Semester;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ Route::resource('notice',TeacherNoticeController::class);
 
 Route::resource('student',StudentController::class);
 
-
+//LabAssistant Route
+ROute::get('/dashboard',[\App\Http\Controllers\Teacher\LabDashController::class,'index']);
 
 
 Route::get('/faculty/{faculty}/semesters', function ($id) {

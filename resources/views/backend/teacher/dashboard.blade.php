@@ -310,10 +310,4 @@
         </div>
     </div>
 @endsection
-@push('scripts')
-    <script src={{ asset('assets/admin/js/datepicker.js') }} type="text/javascript"></script>
-    <script src={{ asset('assets/admin/js/datepicker1.js') }} type="text/javascript"></script>
-    <script src={{ asset('assets/admin/js/datepicker.min.js') }} type="text/javascript"></script>
-    <script src={{ asset('assets/teacher/js/switch1.js') }} type="text/javascript"></script>
-    <script src={{ asset('assets/teacher/js/switch.js') }} type="text/javascript"></script>
-@endpush
+
