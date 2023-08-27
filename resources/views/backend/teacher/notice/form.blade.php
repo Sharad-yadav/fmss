@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-lg-6">
-            <label for="Notice"> Notice Upload</label>
+            <label for="note"> Notice Upload</label>
             {!! Form::file('file', ['class' => 'form-control']) !!}
             @error('file')
             {{ $message }}
@@ -20,7 +20,7 @@
 
     <div class="form-group row">
         <div class="col-lg-6">
-            <label for="for">For</label>
+            <label for="semester">For</label>
             {!! Form::select('for', $notices, null, ['class' => 'form-control']) !!}
             @error('for')
             {{ $message }}

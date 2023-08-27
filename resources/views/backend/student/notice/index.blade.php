@@ -9,9 +9,7 @@
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-actions">
-                    <a href="{{ route('admin.notice.create') }}" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> Create
-                    </a>
+                   
                 </div>
             </div>
         </div>
@@ -40,7 +38,7 @@
             var table = $('#notice-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.notice.index') }}",
+                ajax: "{{ route('student.notice.index') }}",
                 columns: [
                     { data: 'id', name: 'id' },
                     {data: 'name', name: 'name'},
