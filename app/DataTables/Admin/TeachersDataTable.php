@@ -42,7 +42,7 @@ class TeachersDataTable extends DataTable
      */
     public function query(Teacher $model): QueryBuilder
     {
-        return $model->with(['user', 'faculty']);
+        return $model->with(['user', 'faculty'])->select('teachers.*');
     }
 
     /**
