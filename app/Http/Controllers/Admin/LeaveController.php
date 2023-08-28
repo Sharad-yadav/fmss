@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Admin;
 
 use App\Constants\LeaveConstant;
 use App\Http\Controllers\Controller;
 use App\Models\Leave;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class LeaveController extends Controller
 {
-    private $view = 'backend.teacher.leave.';
+    private $view = 'backend.admin.leave.';
+
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +20,7 @@ class LeaveController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        return view($this->view . 'index');
+        return view($this->view .'index');
     }
 
     /**
@@ -28,9 +28,7 @@ class LeaveController extends Controller
      */
     public function create()
     {
-        $leaves = collect(LeaveConstant::LEAVE_TYPE)->pluck('name', 'id');
-
-        return view($this->view.'create', compact('leaves'));
+        //
     }
 
     /**
@@ -38,11 +36,7 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-        $storeData =  $request->all();
-        $storeData['user_id'] = frontUser('id');
-        $leaves = Leave::create($storeData);
-
-        return redirect()->route('teacher.leave.index')->with('success', 'leave uploaded successfully.');
+        //
     }
 
     /**
@@ -76,9 +70,10 @@ class LeaveController extends Controller
     {
         //
     }
+
     public function datatable()
     {
-        $leaves= Leave::where('user_id', frontUser('id'))->with(['user']);
+        $leaves= Leave::with(['user.roles'])->get();
         return DataTables::of($leaves)
             ->addIndexColumn()
             ->editColumn('leave_type_id', function($row) {
@@ -99,5 +94,4 @@ class LeaveController extends Controller
             ->rawColumns(['leave_type_id', 'action'])
             ->make(true);
     }
-    //
 }

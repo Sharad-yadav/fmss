@@ -68,6 +68,10 @@ class RouteConstant
         'admin.notice.edit',
         'admin.notice.show',
     ];
+
+    const AdminLeave =[
+        'admin.leave.index',
+    ];
     const AdminSyllabus = [
         'admin.syllabus.index',
         'admin.syllabus.create',

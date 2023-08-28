@@ -16,12 +16,8 @@ class Leave extends Model
     public function leaveType(): BelongsTo {
         return $this->belongsTo(LeaveType::class,foreignKey: 'leave_type_id',ownerKey: 'id');
     }
-    public  function teacher(): BelongsTo{
-        return $this->belongsTo(Teacher::class,'teacher_id','id');
+    public  function user(): BelongsTo{
+        return $this->belongsTo(User::class,'user_id','id');
     }
-    public function student(): BelongsTo{
-        return $this->belongsTo(Student::class,'student_id','id');
-    }
-
 }
 

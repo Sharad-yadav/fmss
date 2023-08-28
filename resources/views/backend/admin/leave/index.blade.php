@@ -9,9 +9,7 @@
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-actions">
-                    <a href="{{ route('teacher.leave.create') }}" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> Create
-                    </a>
+
                 </div>
             </div>
         </div>
@@ -20,6 +18,8 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Name</th>
+                    <th>Role</th>
                     <th>Leave Type</th>
                     <th>Description</th>
                     <th>Date</th>
@@ -40,9 +40,11 @@
             var table = $('#leave-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('teacher.leave.index') }}",
+                ajax: "{{ route('admin.leave.index') }}",
                 columns: [
                     { data: 'id', name: 'id' },
+                    { data: 'user.name', name: 'user.name' },
+                    { data: 'user.roles.name', name: 'user.roles.name' },
                     { data: 'leave_type_id', name: 'leave_type_id' },
                     { data: 'description', name: 'description' },
                     { data: 'date', name: 'date' },

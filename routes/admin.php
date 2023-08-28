@@ -21,3 +21,4 @@ Route::resource('grade','GradeController');
 Route::resource('subject','SubjectController');
 Route::resource('notice','NoticeController');
 Route::resource('syllabus','SyllabusController');
+Route::resource('leave','LeaveController');

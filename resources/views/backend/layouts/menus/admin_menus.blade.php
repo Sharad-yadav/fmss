@@ -119,6 +119,17 @@
                     <span class="kt-menu__link-text">Notice</span>
                 </a>
             </li>
+            <li class="kt-menu__item {{ getActiveClass(\App\Constants\RouteConstant::AdminLeave) }} " aria-haspopup="true">
+                <a href="{{ route('admin.leave.index') }}" class="kt-menu__link ">
+                    <span class="kt-menu__link-icon">
+                        <i class="la la-book">
+                        </i>
+                    </span>
+                    <span class="kt-menu__link-text">Leave</span>
+                </a>
+            </li>
+
+        </ul>
 
     </div>
 </div>
