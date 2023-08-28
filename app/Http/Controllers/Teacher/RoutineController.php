@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Student;
-use App\Models\Assignment;
-use App\Models\AssignmentSubmission;
+namespace App\Http\Controllers\Teacher;
+
+use App\Http\Controllers\Controller;
 use App\Models\Batch;
-use App\Models\Faculty;
+use App\Models\Routine;
 use App\Models\Section;
-use App\Models\Subject;
 use App\Models\Semester;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
-class Assignment_uploadController extends Controller
+class RoutineController extends Controller
 {
-
-    private $view = 'backend.student.assignment_upload.';
+    private $view = 'backend.teacher.routine.';
     /**
      * Display a listing of the resource.
      */
@@ -25,8 +22,6 @@ class Assignment_uploadController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-
-
         return view($this->view . 'index');
     }
 
@@ -35,11 +30,12 @@ class Assignment_uploadController extends Controller
      */
     public function create()
     {
-
-        $assignments = Assignment::pluck('assignments','id');
-
-        return view($this->view . 'create', compact('assignments'));
+        $batches =Batch::pluck('batch_year','id');
+        $semesters = Semester::pluck('name','id');
+        $sections = Section::pluck('name','id');
+        return view($this->view . 'create', compact('batches','semesters','sections'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -47,14 +43,12 @@ class Assignment_uploadController extends Controller
     public function store(Request $request)
     {
         $storeData =  $request->all();
-        $user = frontUser()->load('student');
-        $storeData['student_id'] = $user->student->id;
-        if ($file = $request->file('file')) {
-            $storeData['file'] = Storage::putFile('files/assignment_submission/', $file);
+        if($file = $request->file('file')) {
+            $storeData['file'] = Storage::putFile('files/routines/', $file);
         }
-        $assignment_submissions = AssignmentSubmission::create($storeData);
+        $routines = Routine::create($storeData);
 
-        return redirect()->route('student.assignment_upload.index')->with('success', 'Assignment uploaded successfully.');
+        return redirect()->route('teacher.routine.index')->with('success', 'Assignment uploaded successfully.');
     }
 
     /**
@@ -90,22 +84,22 @@ class Assignment_uploadController extends Controller
     }
     public function datatable()
     {
-        $assignments_submissions = AssignmentSubmission::query()->with([ 'student.user','assignment']);
-        return DataTables::of($assignments_submissions)
+        $routines= Routine::query()->with([ 'semester','batch','section']);
+        return DataTables::of($routines)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $params = [
                     'is_edit' => true,
                     'is_delete' => true,
                     'is_show' => true,
-                    'route' => 'student.assignment_upload.',
-                    'url' => 'admin/assignment_upload',
+                    'route' => 'teacher.routine.',
+                    'url' => 'admin/routine',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));
             })
             ->editColumn('file', function ($row) {
-                return '<a href="' . Storage::url($row->file) . '" target="_blank">' . $row->name . '</a>';
+                return '<a href="'. Storage::url($row->file) .'" target="_blank">'. $row->name .'</a>';
             })
             ->rawColumns(['file', 'action'])
             ->make(true);

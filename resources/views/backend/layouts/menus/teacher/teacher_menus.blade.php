@@ -20,15 +20,39 @@
                     <span class="kt-menu__link-text">Note</span>
                 </a>
             </li>
-            <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('teacher.assignment.index') }}" class="kt-menu__link ">
+            <li class="kt-menu__item kt-menu__item--submenu " aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
                     <span class="kt-menu__link-icon">
                         <i class="la la-book">
                         </i>
                     </span>
                     <span class="kt-menu__link-text">Assignment</span>
+                    <i class="kt-menu__ver-arrow la la-angle-right"></i>
                 </a>
-            </li>
+                <div class="kt-menu__submenu " kt-hidden-height="400" style="">
+                    <span class="kt-menu__arrow"></span>
+                    <ul class="kt-menu__subnav">
+                        <li class="kt-menu__item " aria-haspopup="true">
+                            <a href="{{ route('teacher.assignment.index') }}" class="kt-menu__link ">
+                                <span class="kt-menu__link-icon">
+                                    <i class="la la-list-ul">
+                                    </i>
+                                </span>
+                                <span class="kt-menu__link-text">Assignment</span>
+                            </a>
+                        </li>
+                        <li class="kt-menu__item " aria-haspopup="true">
+                            <a href="{{ route('student.assignment_upload.index') }}" class="kt-menu__link ">
+                                <span class="kt-menu__link-icon">
+                                    <i class="la la-list-ul">
+                                    </i>
+                                </span>
+                                <span class="kt-menu__link-text">Assignment_Received</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <li class="kt-menu__item " aria-haspopup="true">
 
             <li class="kt-menu__item " aria-haspopup="true">
                 <a href="{{ route('admin.semester.index') }}" class="kt-menu__link ">
@@ -54,7 +78,7 @@
                         <i class="la la-book">
                         </i>
                     </span>
-                    <span class="kt-menu__link-text">Subject</span>
+                    <span class="kt-menu__link-text">Routine</span>
                 </a>
 
             </li>

@@ -24,12 +24,11 @@ class AssignmentController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        $assignments = Assignment::latest()->paginate(10);
         $title = 'Delete Note!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
-        return view($this->view . 'index', compact('assignments'));
+        return view($this->view . 'index');
     }
 
     /**
@@ -99,7 +98,7 @@ class AssignmentController extends Controller
 
     public function datatable()
     {
-        $assignments = Assignment::query()->with(['subject', 'section.semester.faculty', 'teacher.user', 'batch']);
+        $assignments = Assignment::query()->where('section_id', frontUser()->student->section_id)->with(['subject', 'section.semester.faculty', 'teacher.user', 'batch']);
         return DataTables::of($assignments)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {

@@ -16,6 +16,9 @@ class StudentsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('semester', function ($row) {
+                return ($row->semester->faculty->name . " ". $row->semester->name) ?? null;
+            })
             ->addColumn('action', function ($row) {
                 $params = [
                     'is_edit' => true,
@@ -59,7 +62,7 @@ class StudentsDataTable extends DataTable
             Column::make('user.email', 'user.email')->title('Email'),
             Column::make('faculty.name', 'faculty.name')->title('Faculty'),
             Column::make('batch.batch_year', 'batch.batch_year')->title('Batch_Year'),
-            Column::make('semester.name', 'semester.name')->title('Semester'),
+            Column::make('semester', 'semester.faculty.name')->title('Semester'),
             Column::make('section.name', 'section.name')->title('Section'),
             Column::make('user.number','user.number')->title('phone'),
             Column::computed('action')

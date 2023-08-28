@@ -34,6 +34,9 @@ class Semester extends Model
     public function syllabi(): HasMany{
         return $this->hasMany(Syllabus::class,'semester_id','id');
     }
+    public function routines():HasOne{
+        return $this->hasOne(Routine::class,'semester_id','id');
+    }
 
     public function getSemesterAttribute() {
         return $this->faculty->name.' '.$this->name;

@@ -42,7 +42,7 @@ class StudentController extends Controller
     public function create()
     {
         $faculties = Faculty::all()->pluck('name', 'id');
-        $semesters = Semester::all()->pluck('name', 'id');
+        $semesters = Semester::all()->pluck('semester', 'id');
         $sections = Section::all()->pluck('name', 'id');
         $batches = Batch::all()->pluck('batch_year', 'id');
         $users = User::all()->pluck('name', 'id');

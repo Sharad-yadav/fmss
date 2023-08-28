@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Section extends Model
 {
@@ -27,5 +28,8 @@ class Section extends Model
     }
     public function faculty(): BelongsTo{
         return $this->belongsTo(Faculty::class,'section_id','id');
+    }
+    public function routines():HasOne {
+        return $this->hasOne(Routine::class,'section_id','id');
     }
 }
