@@ -131,7 +131,6 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
 
     @include('sweetalert::alert')
-
     <!-- end::Scrolltop -->
 
     <!-- begin::Global Config(global config for global JS sciprts) -->

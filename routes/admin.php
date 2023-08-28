@@ -22,3 +22,5 @@ Route::resource('subject','SubjectController');
 Route::resource('notice','NoticeController');
 Route::resource('syllabus','SyllabusController');
 Route::resource('leave','LeaveController');
+Route::get('password-change', 'ProfileController@changePasswordShow')->name('password.change');
+Route::post('password-change', 'ProfileController@changePassword')->name('password.change');

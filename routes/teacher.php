@@ -41,3 +41,7 @@ Route::get('semester/{semester}/sections', function ($id) {
 Route::get('semester/{semester}/subjects', function ($id) {
     return app(Subject::class)->query()->where(['semester_id' => $id])->select('id', 'name as text')->get();
 });
+
+Route::get('password-change', 'ProfileController@changePasswordShow')->name('password.change');
+Route::post('password-change', 'ProfileController@changePassword')->name('password.change');
+

@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-9 col-xl-6">
-                            <a href="#"> Change Password ? </a>
+                            <a href="{{ route('admin.password.change') }}"> Change Password ? </a>
                         </div>
                     </div>
                 </div>
