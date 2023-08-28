@@ -20,6 +20,7 @@ Route::resource('assignment',AssignmentController::class);
 
 Route::resource('leave',\App\Http\Controllers\Teacher\LeaveController::class);
 Route::resource('routine',\App\Http\Controllers\Teacher\RoutineController::class);
+Route::resource('notice',\App\Http\Controllers\Teacher\NoticeController::class);
 
 //LabAssistant Route
 ROute::get('/dash',[\App\Http\Controllers\Teacher\LabDashController::class,'index']);
