@@ -32,8 +32,8 @@
                         <br>
                         {!! Form::file('file', ['class' => '']) !!}
                         <br>
-                        @error('file')
-                            {{ $message }}
+                        @error('file')  <p style="color:red" >
+                            {{ $message }}</p>
                         @enderror
                         @if(isset($failures))
                             @foreach ($failures as $failure)

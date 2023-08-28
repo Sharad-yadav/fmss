@@ -5,6 +5,7 @@
             <label for="">Name</label>
             {!! Form::text('name', null, ['class' => 'form-control']) !!}
             @error('name')
+            <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -13,6 +14,8 @@
             <label for="Notice"> Notice Upload</label>
             {!! Form::file('file', ['class' => 'form-control']) !!}
             @error('file')
+            <p style="color:red" >
+
             {{ $message }}
             @enderror
         </div>
@@ -23,6 +26,8 @@
             <label for="for">For</label>
             {!! Form::select('for', $notices, null, ['class' => 'form-control']) !!}
             @error('for')
+            <p style="color:red" >
+
             {{ $message }}
             @enderror
         </div>

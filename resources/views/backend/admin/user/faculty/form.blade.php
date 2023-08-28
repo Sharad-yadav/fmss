@@ -3,14 +3,14 @@
         <div class="col-lg-6">
             <label for="">Name</label>
             {!! Form::text('name',$faculty->name ?? null, ['class' => 'form-control']) !!}
-            @error('name')
+            @error('name')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="years_to_graduate">Duration</label>
             {!! Form::text('years_to_graduate', $faculty->years_to_graduate?? null, ['class' => 'form-control']) !!}
-            @error('years_to_graduate')
+            @error('years_to_graduate')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>

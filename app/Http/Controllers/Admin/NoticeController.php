@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Constants\NoticeConstant;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\NoticeRequest;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +41,7 @@ class NoticeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NoticeRequest $request)
     {
         $storeData =  $request->all();
         $storeData['user_id'] = frontUser('id');
@@ -71,7 +72,7 @@ class NoticeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NoticeRequest $request, string $id)
     {
         //
     }

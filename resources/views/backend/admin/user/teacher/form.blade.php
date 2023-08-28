@@ -3,14 +3,14 @@
         <div class="col-lg-6">
             <label for="name">Name</label>
             {!! Form::text('user[name]', null, ['class' => 'form-control']) !!}
-            @error('user.name')
+            @error('user.name')  <p style="color:red" >
                 {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="email">Email</label>
             {!! Form::email('user[email]', null, ['class' => 'form-control']) !!}
-            @error('user.email')
+            @error('user.email')  <p style="color:red" >
                 {{ $message }}
             @enderror
         </div>
@@ -19,7 +19,7 @@
         <div class="col-lg-6">
             <label for="faculty">Faculty</label>
             {!! Form::select('faculty_id', $faculties, null, ['class' => 'form-control']) !!}
-            @error('faculty_id')
+            @error('faculty_id')  <p style="color:red" >
                 {{ $message }}
             @enderror
         </div>
@@ -27,7 +27,7 @@
         <div class="col-lg-6">
             <label for="phone">Phone</label>
             {!! Form::text('user[number]', null, ['class' => 'form-control']) !!}
-            @error('user.number')
+            @error('user.number')  <p style="color:red" >
                 {{ $message }}
             @enderror
         </div>
@@ -37,7 +37,7 @@
         <div class="col-lg-6">
             <label for="salary">Salary</label>
             {!! Form::text('salary', null, ['class' => 'form-control']) !!}
-            @error('salary')
+            @error('salary')  <p style="color:red" >
 
             {{ $message }}
             @enderror
