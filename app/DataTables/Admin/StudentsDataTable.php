@@ -35,7 +35,7 @@ class StudentsDataTable extends DataTable
 
     public function query(Student $model): QueryBuilder
     {
-        return $model->with(['user', 'faculty', 'batch', 'semester', 'section']);
+        return $model->with(['user', 'faculty', 'batch', 'semester', 'section'])->select('students.*');
     }
 
     public function html(): HtmlBuilder
