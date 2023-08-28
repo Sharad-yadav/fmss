@@ -42,9 +42,9 @@ class LeaveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Leave $leave)
     {
-        //
+        return view($this->view . 'show', compact('leave'));
     }
 
     /**
@@ -82,11 +82,11 @@ class LeaveController extends Controller
             })
             ->addColumn('action', function ($row) {
                 $params = [
-                    'is_edit' => true,
-                    'is_delete' => true,
+                    'is_edit' => false,
+                    'is_delete' => false,
                     'is_show' => true,
-                    'route' => 'teacher.leave.',
-                    'url' => 'teacher/leave',
+                    'route' => 'admin.leave.',
+                    'url' => 'admin/leave',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Student;
 use App\Constants\LeaveConstant;
 use App\Http\Controllers\Controller;
 use App\Models\Leave;
-use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
@@ -21,6 +20,9 @@ class LeaveController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
+        $title = 'Delete Leave!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view($this->view . 'index');
     }
 
@@ -39,13 +41,8 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-
         $storeData =  $request->all();
-        $user = frontUser()->load('student');
-        $storeData['student_id'] = $user->student->id;
-        if($file = $request->file('file')) {
-            $storeData['file'] = Storage::putFile('files/notices/', $file);
-        }
+        $storeData['user_id'] = frontUser('id');
         $leaves = Leave::create($storeData);
 
         return redirect()->route('student.leave.index')->with('success', 'leave uploaded successfully.');
@@ -54,39 +51,52 @@ class LeaveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Leave $leave)
     {
-        //
+        return view($this->view . 'show', compact('leave'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Leave $leave)
     {
-        //
+        $leaves = collect(LeaveConstant::LEAVE_TYPE)->pluck('name', 'id');
+        return view($this->view . 'edit', compact('leaves','leave'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Leave $leave)
     {
-        //
+        $updateData = $request->all();
+        $leave->update($updateData);
+
+        return redirect()->route('student.leave.index')->with('success', 'Leave request updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Leave $leave)
     {
-        //
+        $leave->delete();
+
+        return redirect()->route('student.leave.index')->with('success', 'Leave request deleted successfully.');
     }
+
     public function datatable()
     {
-        $leaves= Leave::query()->with(['student.user']);
+        $leaves= Leave::where('user_id', frontUser('id'))->with(['user']);
         return DataTables::of($leaves)
             ->addIndexColumn()
+            ->editColumn('leave_type_id', function($row) {
+                $type = collect(LeaveConstant::LEAVE_TYPE)->where('id', $row->id)->first();
+                return $type['name'];
+            })
             ->addColumn('action', function ($row) {
                 $params = [
                     'is_edit' => true,
@@ -98,10 +108,8 @@ class LeaveController extends Controller
                 ];
                 return view('backend.datatable.action', compact('params'));
             })
-            ->editColumn('file', function ($row) {
-                return '<a href="'. Storage::url($row->file) .'" target="_blank">'. $row->file .'</a>';
-            })
-            ->rawColumns(['file', 'action'])
+            ->rawColumns(['leave_type_id', 'action'])
             ->make(true);
     }
+    //
 }

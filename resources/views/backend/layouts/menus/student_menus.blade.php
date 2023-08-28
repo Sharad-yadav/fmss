@@ -39,25 +39,17 @@
                 </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('student.assignment.index') }}" class="kt-menu__link ">
+                <a href="{{ route('student.leave.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-book">
                         </i>
                     </span>
-                    <span class="kt-menu__link-text">Assignment</span>
+                    <span class="kt-menu__link-text">leave</span>
                 </a>
             </li>
+
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('student.assignment_upload.index') }}" class="kt-menu__link ">
-                    <span class="kt-menu__link-icon">
-                        <i class="la la-book">
-                        </i>
-                    </span>
-                    <span class="kt-menu__link-text">Assignment_upload</span>
-                </a>
-            </li>
-            <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('student.notice.index') }}" class="kt-menu__link ">
+                <a href="{{ route('student.routine.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-list-ul">
                         </i>
@@ -65,15 +57,7 @@
                     <span class="kt-menu__link-text">Routine</span>
                 </a>
             </li>
-            <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ getProfileRoute() }}" class="kt-menu__link ">
-                    <span class="kt-menu__link-icon">
-                        <i class="la la-gear">
-                        </i>
-                    </span>
-                    <span class="kt-menu__link-text">Settings</span>
-                </a>
-            </li>
+
         </ul>
     </div>
 </div>
