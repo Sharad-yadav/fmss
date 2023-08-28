@@ -2,7 +2,7 @@
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="semester">Faculty</label>
-            {!! Form::select('faculty_id', $faculties, null, ['class' => 'form-control', 'id' => 'faculty']) !!}
+            {!! Form::select('faculty_id', [] , null, ['class' => 'form-control', 'id' => 'faculty']) !!}
             @error('faculty_id')
             {{ $message }}
             @enderror

@@ -19,9 +19,9 @@ class DashboardController extends Controller
      */
     public function index() {
 
-        $notes = Notes::query()->take(5)->get();
+        $notes = Notes::where('user_id', frontUser('id'))->take(5)->get();
         $notices = Notice::query()->take(5)->get();
-        $assignments = Assignment::query()->take(5)->get();
+        $assignments = Assignment::where('teacher_id', getAuthTeacher('id'))->take(5)->get();
         return view('backend.teacher.dashboard', compact('assignments','notes','notices'));
     }
 }

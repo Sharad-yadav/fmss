@@ -2,6 +2,9 @@
 
 use App\Constants\RoleConstant;
 use App\Constants\TeacherConstant;
+use App\Models\Section;
+use App\Models\Semester;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -31,6 +34,15 @@ function frontUser($attribute = null)
         return me()->{$attribute};
     }
     return me();
+}
+
+function getAuthTeacher($attribute = null) {
+    $user = frontUser()->load('teacher');
+    $teacher = $user->teacher;
+    if ($attribute) {
+        return $teacher->{$attribute};
+    }
+    return $teacher;
 }
 
 /**
@@ -101,6 +113,37 @@ function getActiveClass(array $routes, $parent=false) {
 
 function getCurrentRouteName() {
     return request()->route()->getName();
+}
+
+/**
+ * @return mixed
+ */
+function getSelectedFaculty($facultyId)
+{
+    return app(\App\Models\Faculty::class)->where('id', $facultyId)->get(['id', 'name as text']);
+}
+
+/**
+ * @return mixed
+ */
+function getSelectedSemester($semesterId)
+{
+    return app(Semester::class)->where('id', $semesterId)->get(['id', 'name as text']);
+}
+
+/**
+ * @return mixed
+ */
+function getSelectedSubject($subjectId)
+{
+    return app(Subject::class)->where('id', $subjectId)->get(['id', 'name as text']);
+}
+/**
+ * @return mixed
+ */
+function getSelectedSection($sectionId)
+{
+    return app(Section::class)->where('id', $sectionId)->get(['id', 'name as text']);
 }
 
 function getStudentData()
