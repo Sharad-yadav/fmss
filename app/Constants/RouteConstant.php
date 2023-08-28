@@ -78,4 +78,36 @@ class RouteConstant
         'admin.syllabus.edit',
         'admin.syllabus.show',
     ];
+
+    const TeacherDashboard = ['teacher.dashboard'];
+
+    const TeacherAssignment =[
+        'teacher.assignment.index',
+        'teacher.assignment.create',
+        'teacher.assignment.edit',
+        'teacher.assignment.show',
+    ];
+    const TeacherRoutine =[
+        'teacher.routine.index',
+        'teacher.routine.create',
+        'teacher.routine.edit',
+        'teacher.routine.show',
+    ];
+    const TeacherNotice =[
+        'teacher.notice.index',
+    ];
+    const TeacherLeave =[
+        'teacher.leave.create',
+        'teacher.leave.index',
+        'teacher.leave.edit',
+        'teacher.leave.show',
+    ];
+    const TeacherNote =[
+        'teacher.note.create',
+        'teacher.note.index',
+        'teacher.note.index',
+        'teacher.note.show',
+    ];
+
+
 }
