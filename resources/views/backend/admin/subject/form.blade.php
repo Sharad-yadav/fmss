@@ -4,7 +4,7 @@
         <div class="col-lg-6">
             <label for="semester">Semester</label>
             {!! Form::select('semester_id', $semesters, null, ['class' => 'form-control']) !!}
-            @error('semester_id')
+            @error('semester_id')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <label for="code">Code</label>
             {!! Form::text('code', null, ['class' => 'form-control']) !!}
-            @error('code')
+            @error('code')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -23,7 +23,7 @@
         <div class="col-lg-6">
             <label for="name">Name</label>
             {!! Form::text('name', null, ['class' => 'form-control']) !!}
-            @error('name')
+            @error('name')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -31,7 +31,7 @@
         <div class="col-lg-6">
             <label for="credit">Credit_Hour</label>
             {!! Form::text('credit_hour', null, ['class' => 'form-control']) !!}
-            @error('credit_hour')
+            @error('credit_hour')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>

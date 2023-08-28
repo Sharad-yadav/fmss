@@ -4,6 +4,7 @@
             <label for="faculty">Faculty</label>
             {!! Form::select('faculty_id',$faculties, null, ['class' => 'form-control']) !!}
             @error('faculty_id')
+            <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -11,6 +12,7 @@
             <label for="semester">Semester</label>
             {!! Form::text('name',null, ['class' => 'form-control']) !!}
             @error('name')
+            <p style="color:red" >
             {{ $message }}
             @enderror
         </div>

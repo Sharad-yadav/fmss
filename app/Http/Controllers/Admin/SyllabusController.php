@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SyllabusRequest;
 use App\Models\Batch;
 use App\Models\Faculty;
 use App\Models\Semester;
@@ -46,7 +47,7 @@ class SyllabusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SyllabusRequest $request)
     {
         $storeData =  $request->all();
         $storeData['user_id'] = frontUser('id');
@@ -83,7 +84,7 @@ class SyllabusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SyllabusRequest $request, string $id)
     {
 
         $syllabus = Syllabus::findOrFail($id);

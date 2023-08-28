@@ -3,14 +3,14 @@
         <div class="col-lg-6">
             <label for="">Assignments</label>
             {!! Form::text('name', null, ['class' => 'form-control']) !!}
-            @error('name')
+            @error('name')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="note"> Assignment Upload</label>
             {!! Form::file('file', ['class' => 'form-control']) !!}
-            @error('file')
+            @error('file')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>

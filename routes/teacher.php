@@ -17,6 +17,7 @@ Route::resource('profile',ProfileController::class);
 Route::resource('note', NoteController::class);
 
 Route::resource('assignment',AssignmentController::class);
+Route::resource('notice',NoteController::class);
 
 Route::resource('leave',\App\Http\Controllers\Teacher\LeaveController::class);
 Route::resource('routine',\App\Http\Controllers\Teacher\RoutineController::class);
