@@ -22,7 +22,7 @@ Route::resource('leave',\App\Http\Controllers\Teacher\LeaveController::class);
 Route::resource('routine',\App\Http\Controllers\Teacher\RoutineController::class);
 
 //LabAssistant Route
-ROute::get('/dashboard',[\App\Http\Controllers\Teacher\LabDashController::class,'index']);
+ROute::get('/dash',[\App\Http\Controllers\Teacher\LabDashController::class,'index']);
 
 
 Route::get('/all-faculties', function () {

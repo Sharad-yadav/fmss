@@ -3,7 +3,7 @@
         data-ktmenu-dropdown-timeout="500">
         <ul class="kt-menu__nav ">
             <li class="kt-menu__item  kt-menu__item--active" aria-haspopup="true">
-                <a href="{{ route('teacher.dashboard') }}" class="kt-menu__link ">
+                <a href="{{ route('dashboard') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-dashboard">
                         </i>
