@@ -88,6 +88,15 @@
                     <span class="kt-menu__link-text"> Routine</span>
                 </a>
             </li>
+            <li class="kt-menu__item " aria-haspopup="true">
+                <a href="{{ route('teacher.syllabus.index') }}" class="kt-menu__link ">
+                    <span class="kt-menu__link-icon">
+                        <i class="la la-align-justify">
+                        </i>
+                    </span>
+                    <span class="kt-menu__link-text">Syllabus</span>
+                </a>
+            </li>
 
 
 {{--            <li class="kt-menu__item " aria-haspopup="true">--}}
