@@ -22,5 +22,8 @@ class Batch extends Model
     public function syllabi(): HasMany{
         return $this->hasMany(Syllabus::class,'batch_id','id');
     }
+    public function routines(): HasMany{
+        return $this->hasMany(Routine::class,'batch_id','id');
+    }
 
 }
