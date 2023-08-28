@@ -4,3 +4,6 @@
 .delete-btn {
     margin:2px;
 }
+.invalid-feedback {
+    display: block!important;
+}

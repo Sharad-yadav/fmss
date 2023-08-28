@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -77,5 +81,17 @@ class ProfileController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function changePasswordShow() {
+        return view($this->view.'change-password');
+    }
+
+    public function changePassword(ChangePasswordRequest $request) {
+        frontUser()->update(['password' => bcrypt($request->input('password'))]);
+
+        return redirect()->route('student.profile.index')->with('message', 'Password Changed Successfully.');
     }
 }

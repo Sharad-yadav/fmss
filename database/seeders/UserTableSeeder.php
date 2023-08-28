@@ -27,7 +27,6 @@ class UserTableSeeder extends Seeder
                 'role_id' => RoleConstant::ADMIN_ID
             ],
             [
-
                 'name' => 'Ganesh Pant',
                 'email' => 'ganesh3076@gmail.com',
                 'password' => 'password',
