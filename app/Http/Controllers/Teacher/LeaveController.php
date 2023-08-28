@@ -20,6 +20,9 @@ class LeaveController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
+        $title = 'Delete Leave!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view($this->view . 'index');
     }
 
@@ -48,33 +51,40 @@ class LeaveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Leave $leave)
     {
-        //
+        return view($this->view . 'show', compact('leave'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Leave $leave)
     {
-        //
+        $leaves = collect(LeaveConstant::LEAVE_TYPE)->pluck('name', 'id');
+        return view($this->view . 'edit', compact('leaves','leave'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Leave $leave)
     {
-        //
+        $updateData = $request->all();
+        $leave->update($updateData);
+
+        return redirect()->route('teacher.leave.index')->with('success', 'Leave request updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Leave $leave)
     {
-        //
+        $leave->delete();
+
+        return redirect()->route('teacher.leave.index')->with('success', 'Leave request deleted successfully.');
     }
     public function datatable()
     {

@@ -42,15 +42,15 @@
 
 
 
-            <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('admin.semester.index') }}" class="kt-menu__link ">
-                    <span class="kt-menu__link-icon">
-                        <i class="la la-gear">
-                        </i>
-                    </span>
-                    <span class="kt-menu__link-text">Settings</span>
-                </a>
-            </li>
+{{--            <li class="kt-menu__item " aria-haspopup="true">--}}
+{{--                <a href="{{ route('admin.semester.index') }}" class="kt-menu__link ">--}}
+{{--                    <span class="kt-menu__link-icon">--}}
+{{--                        <i class="la la-gear">--}}
+{{--                        </i>--}}
+{{--                    </span>--}}
+{{--                    <span class="kt-menu__link-text">Settings</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
 
         </ul>

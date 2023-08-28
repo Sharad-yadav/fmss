@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="kt-menu__item  {{ getActiveClass(\App\Constants\RouteConstant::TeacherRoutine) }} " aria-haspopup="true">
-                <a href="{{ route('admin.batch.index') }}" class="kt-menu__link ">
+                <a href="{{ route('teacher.routine.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-book">
                         </i>
@@ -59,14 +59,14 @@
 
             </li>
 
-            <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ getProfileRoute() }}" class="kt-menu__link ">
-                    <span class="kt-menu__link-icon">
-                        <i class="la la-gear">
-                        </i>
-                    </span>
-                    <span class="kt-menu__link-text">Settings</span>
-                </a>
-            </li>
+{{--            <li class="kt-menu__item " aria-haspopup="true">--}}
+{{--                <a href="{{ getProfileRoute() }}" class="kt-menu__link ">--}}
+{{--                    <span class="kt-menu__link-icon">--}}
+{{--                        <i class="la la-gear">--}}
+{{--                        </i>--}}
+{{--                    </span>--}}
+{{--                    <span class="kt-menu__link-text">Settings</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
     </div>
 </div>

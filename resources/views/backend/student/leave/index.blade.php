@@ -5,7 +5,7 @@
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <span class="kt-portlet__head-icon"></span>
-                <h3 class="kt-portlet__head-title">Note Listing</h3>
+                <h3 class="kt-portlet__head-title">Leave Listing</h3>
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-actions">
@@ -20,9 +20,9 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Student</th>
                     <th>Leave Type</th>
-                    <th>Leave Upload</th>
+                    <th>Description</th>
+                    <th>Date</th>
                     <th style="text-align: center">Actions</th>
                 </tr>
                 </thead>
@@ -43,9 +43,9 @@
                 ajax: "{{ route('student.leave.index') }}",
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'student.user.name', name: 'student.user.name' },
-                    { data: 'leave_type', name: 'leave_type' },
-                    { data: 'file', name: 'file' },
+                    { data: 'leave_type_id', name: 'leave_type_id' },
+                    { data: 'description', name: 'description' },
+                    { data: 'date', name: 'date' },
                     { data: 'action', name: 'action', orderable: false, searchable: false },
                 ]
             });

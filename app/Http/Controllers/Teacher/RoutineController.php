@@ -22,6 +22,9 @@ class RoutineController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
+        $title = 'Delete Assignment!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view($this->view . 'index');
     }
 
@@ -54,33 +57,54 @@ class RoutineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Routine $routine)
     {
-        //
+        $routine = $routine->load(['batch', 'section','semester']);
+        return view($this->view.'show', compact('routine'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Routine $routine)
     {
-        //
+        $routine = $routine->load('semester','batch','section');
+        $batches = Batch::pluck('batch_year','id');
+        $semesters = Semester::pluck('name','id');
+        $sections = Section::pluck('name','id');
+
+        return view($this->view.'edit', compact('semesters', 'batches','sections','routine'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Routine $routine)
     {
-        //
+        $updateData =  $request->all();
+        if($file = $request->file('file')) {
+            if (Storage::exists($routine->file)) {
+                Storage::delete($routine->file);
+            }
+            $updateData['file'] = Storage::putFile('files/routines', $file);
+        }
+        $routine->update($updateData);
+
+        return redirect()->route('teacher.routine.index')->with('success', 'Routine uploaded successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Routine $routine)
     {
-        //
+        if (Storage::exists($routine->file)) {
+            Storage::delete($routine->file);
+        }
+        $routine->delete();
+
+        return redirect()->route('teacher.routine.index');
+
     }
     public function datatable()
     {
@@ -93,7 +117,7 @@ class RoutineController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'teacher.routine.',
-                    'url' => 'admin/routine',
+                    'url' => 'teacher/routine',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));
