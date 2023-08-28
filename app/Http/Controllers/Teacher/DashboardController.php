@@ -18,7 +18,6 @@ class DashboardController extends Controller
      * @return Application|Factory|View|FoundationApplication
      */
     public function index() {
-
         $notes = Notes::where('user_id', frontUser('id'))->take(5)->get();
         $notices = Notice::query()->take(5)->get();
         $assignments = Assignment::where('teacher_id', getAuthTeacher('id'))->take(5)->get();

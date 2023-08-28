@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Http\Requests\Student\AssignmentSubmissionRequest;
 use App\Models\Assignment;
+use App\Models\AssignmentSubmission;
 use App\Models\Batch;
 use App\Models\Faculty;
 use App\Models\Section;
@@ -36,40 +38,31 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::pluck("name", "id");
-        $faculties = Faculty::pluck('name', "id");
-        $semesters = Semester::pluck('name', 'id');
-        $batches = Batch::pluck('batch_year', 'id');
-        $sections = Section::pluck('name', 'id');
-
-        return view($this->view . 'create', compact('semesters', 'faculties', 'subjects', 'batches', 'sections'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AssignmentSubmissionRequest $request)
     {
         $storeData = $request->all();
-        $student = frontUser()->load('student'); // Assuming the relationship is named 'student'
-        $storeData['student_id'] = $student->student->id; // Assuming 'student_id' is the foreign key
-
+        $storeData['student_id'] = getAuthStudent('id');
         if ($file = $request->file('file')) {
-            $storeData['file'] = Storage::putFile('files/assignments/', $file);
+            $storeData['file'] = Storage::putFile('files/assignment-submission/', $file);
         }
+        AssignmentSubmission::create($storeData);
 
-        $assignment = Assignment::create($storeData);
-
-        return redirect()->route('student.assignment.index')->with('success', 'Assignment uploaded successfully.');
+        return redirect()->route('student.assignment.show', $storeData['assignment_id'])->with('success', 'Assignment uploaded successfully.');
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Assignment $assignment)
     {
-        //
+        $assignment = $assignment->load(['teacher.user', 'subject']);
+        return view($this->view.'show', compact('assignment'));
     }
 
     /**
@@ -77,15 +70,27 @@ class AssignmentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $submission = AssignmentSubmission::find($id);
+
+        return view($this->view.'edit', compact('submission'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AssignmentSubmissionRequest $request, string $id)
     {
-        //
+        $submission = AssignmentSubmission::find($id);
+        $updateData =  $request->all();
+        if($file = $request->file('file')) {
+            if (Storage::exists($submission->file)) {
+                Storage::delete($submission->file);
+            }
+            $updateData['file'] = Storage::putFile('files/assignment-submission', $file);
+        }
+        $submission->update($updateData);
+
+        return redirect()->route('student.assignment.show', $submission->assignment_id)->with('success', 'Notes uploaded successfully.');
     }
 
     /**
@@ -93,12 +98,19 @@ class AssignmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $assignmentSubmission = AssignmentSubmission::find($id);
+        $assignmentId = $assignmentSubmission->id;
+        if (Storage::exists($assignmentSubmission->file)) {
+            Storage::delete($assignmentSubmission->file);
+        }
+        $assignmentSubmission->delete();
+
+        return redirect()->route('student.assignment.show', $assignmentSubmission);
     }
 
     public function datatable()
     {
-        $assignments = Assignment::query()->where('section_id', frontUser()->student->section_id)->with(['subject', 'section.semester.faculty', 'teacher.user', 'batch']);
+        $assignments = Assignment::query()->where('section_id', getAuthStudent('section_id'))->where('batch_id', getAuthStudent('batch_id'))->with(['subject', 'section.semester.faculty', 'teacher.user', 'batch']);
         return DataTables::of($assignments)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {

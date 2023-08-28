@@ -5,16 +5,16 @@
             <div class="kt-portlet__head-label">
                     <span class="kt-portlet__head-icon">
                     </span>
-                <h3 class="kt-portlet__head-title">Edit Note</h3>
+                <h3 class="kt-portlet__head-title">Edit Submission</h3>
             </div>
         </div>
-        {!! Form::model($assignment, [
-            'route' => ['teacher.assignment.update', $assignment->id],
+        {!! Form::model($submission, [
+            'route' => ['student.assignment.update', $submission->id],
             'method' => 'patch',
             'class' => 'kt-form kt-form--label-right',
+            'files' => true
         ]) !!}
-        @include('backend.teacher.assignment.form', ['formAction' => 'Update'])
-
+            @include('backend.student.assignment.form', ['formAction' => 'Update'])
         {!! Form::close() !!}
     </div>
 @endsection
