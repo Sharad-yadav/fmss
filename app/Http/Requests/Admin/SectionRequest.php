@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class SemesterRequest extends FormRequest
+class SectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +23,24 @@ class SemesterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'batch_id' => 'required',
-            'faculty_id' => 'required',
-            'name' => 'required'
+
+            'semester_id' => 'required',
+            'name' => [
+                'required',
+                'string',
+                'max:25',
+                Rule::unique('sections')->where(function ($query) {
+                    $query->where('semester_id', $this->input('semester_id'));
+                }),
+            ],
         ];
     }
-
     public function messages()
     {
         return [
-          'faculty_id.required' => 'The faculty is required',
-          'batch_id.required' => 'The batch is required'
+            'semester_id.required' => 'The semester id is required',
+            'name.required' => 'The Section is required'
+
         ];
     }
 }

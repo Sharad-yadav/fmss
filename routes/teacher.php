@@ -17,6 +17,7 @@ Route::resource('profile',ProfileController::class);
 Route::resource('note', NoteController::class);
 
 Route::resource('assignment',AssignmentController::class);
+Route::resource('notice',NoteController::class);
 
 Route::resource('leave',\App\Http\Controllers\Teacher\LeaveController::class);
 Route::resource('routine',\App\Http\Controllers\Teacher\RoutineController::class);
@@ -41,3 +42,7 @@ Route::get('semester/{semester}/sections', function ($id) {
 Route::get('semester/{semester}/subjects', function ($id) {
     return app(Subject::class)->query()->where(['semester_id' => $id])->select('id', 'name as text')->get();
 });
+
+Route::get('password-change', 'ProfileController@changePasswordShow')->name('password.change');
+Route::post('password-change', 'ProfileController@changePassword')->name('password.change');
+

@@ -18,3 +18,5 @@ Route::resource('assignment',AssignmentController::class);
 Route::resource('notice',NoticeController::class);
 
 Route::resource('assignment_upload',Assignment_uploadController::class);
+Route::get('password-change', 'ProfileController@changePasswordShow')->name('password.change');
+Route::post('password-change', 'ProfileController@changePassword')->name('password.change');

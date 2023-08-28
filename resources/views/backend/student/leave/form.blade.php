@@ -10,7 +10,7 @@
         <div class="col-lg-6">
             <label for="leave type">Leave Type</label>
             {!! Form::select('leave_type',$leaves ,null, ['class' => 'form-control ']) !!}
-            @error('leave_type')
+            @error('leave_type')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -20,7 +20,7 @@
      <div class="col-lg-6">
         <label for="leave"> Leave Upload</label>
         {!! Form::file('file', ['class' => 'form-control']) !!}
-        @error('file')
+        @error('file')  <p style="color:red" >
         {{ $message }}
         @enderror
      </div>

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests;
 
+use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SemesterRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +23,9 @@ class SemesterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'batch_id' => 'required',
-            'faculty_id' => 'required',
-            'name' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-          'faculty_id.required' => 'The faculty is required',
-          'batch_id.required' => 'The batch is required'
+            'current_password'      => ['required', 'min:8', new MatchOldPassword()],
+            'password'              => ['required', 'min:8'],
+            'password_confirmation' => ['required', 'min:8', 'same:password']
         ];
     }
 }

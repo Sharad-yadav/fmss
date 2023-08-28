@@ -6,6 +6,7 @@ use App\Models\Section;
 use App\Models\Semester;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Get user
@@ -34,6 +35,21 @@ function frontUser($attribute = null)
         return me()->{$attribute};
     }
     return me();
+}
+function getImageUrl($role = RoleConstant::ADMIN) {
+    if($role == RoleConstant::ADMIN) {
+        if($image = adminUser('image'))
+        {
+            return Storage::url($image);
+        }
+    }
+    else {
+        if($image = frontUser('image'))
+        {
+            return Storage::url($image);
+        }
+    }
+    return null;
 }
 
 function getAuthTeacher($attribute = null) {

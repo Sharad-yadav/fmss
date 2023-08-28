@@ -5,13 +5,14 @@
             <label for="semester">Semester</label>
             {!! Form::select('semester_id',$semesters, null, ['class' => 'form-control']) !!}
             @error('semester_id')
+            <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="section">Section</label>
             {!! Form::text('name',null, ['class' => 'form-control']) !!}
-            @error('name')
+            @error('name')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>

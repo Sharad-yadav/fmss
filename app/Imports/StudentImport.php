@@ -31,7 +31,7 @@ class StudentImport implements ToCollection, WithHeadingRow , WithValidation
                 'section_id'        => $row['section']
             ];
             $user = User::create($userData);
-            $user->teacher()->create($studentData);
+            $user->student()->create($studentData);
         }
         DB::commit();
     }

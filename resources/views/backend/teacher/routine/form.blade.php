@@ -4,14 +4,14 @@
         <div class="col-lg-6">
             <label for="batch">Batch</label>
             {!! Form::select('batch_id',$batches ,null, ['class' => 'form-control ']) !!}
-            @error('batch_id')
+            @error('batch_id')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="semester">Semester</label>
             {!! Form::select('semester_id',$semesters ,null, ['class' => 'form-control ']) !!}
-            @error('semester_id')
+            @error('semester_id')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -21,14 +21,14 @@
         <div class="col-lg-6">
             <label for="section">Section</label>
             {!! Form::select('section_id',$sections ,null, ['class' => 'form-control ']) !!}
-            @error('section_id')
+            @error('section_id')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="name">Name</label>
             {!! Form::text('name' ,null, ['class' => 'form-control ']) !!}
-            @error('name')
+            @error('name')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -38,7 +38,7 @@
         <div class="col-lg-6">
             <label for="file"> Routine Upload</label>
             {!! Form::file('file', ['class' => 'form-control']) !!}
-            @error('file')
+            @error('file')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>

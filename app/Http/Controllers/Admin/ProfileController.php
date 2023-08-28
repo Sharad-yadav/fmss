@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -42,17 +48,26 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $profile)
     {
-        //
+        return view($this->view.'edit', compact('profile'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $profile)
     {
-        //
+        $updateData =  $request->all();
+        if($image = $request->file('image')) {
+            if (!is_null($profile->image) && Storage::exists($profile->image)) {
+                Storage::delete($profile->image);
+            }
+            $updateData['image'] = Storage::putFile('images/profile', $image);
+        }
+        $profile->update($updateData);
+
+        return redirect()->route('admin.profile.index');
     }
 
     /**
@@ -61,5 +76,18 @@ class ProfileController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function changePasswordShow() {
+        return view($this->view.'change-password');
+    }
+
+    public function changePassword(ChangePasswordRequest $request) {
+        adminUser()->update(['password' => bcrypt($request->input('password'))]);
+
+        return redirect()->route('admin.profile.index')->with('message', 'Password Changed Successfully.');
     }
 }

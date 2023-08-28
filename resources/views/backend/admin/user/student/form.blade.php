@@ -3,14 +3,14 @@
         <div class="col-lg-6">
             <label for="">Name</label>
             {!! Form::text('user[name]', null, ['class' => 'form-control']) !!}
-            @error('user.name')
+            @error('user.name')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
         <div class="col-lg-6">
             <label for="email">Email</label>
             {!! Form::email('user[email]', null, ['class' => 'form-control']) !!}
-            @error('user.email')
+            @error('user.email')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -19,7 +19,7 @@
         <div class="col-lg-6">
             <label for="faculty">Faculty</label>
             {!! Form::select('faculty_id', $faculties, null, ['class' => 'form-control']) !!}
-            @error('faculty_id')
+            @error('faculty_id')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -27,8 +27,8 @@
         <div class="col-lg-6">
             <label for="batch">Batch</label>
             {!! Form::select('batch_id', $batches,null, ['class' => 'form-control']) !!}
-            @error('batch_id')
-            <span class="text-danger">{{ $message }}</span>
+            @error('batch_id')  <p style="color:red" >
+            {{ $message }}
             @enderror
         </div>
     </div>
@@ -37,7 +37,7 @@
         <div class="col-lg-6">
             <label for="semester">Semester</label>
             {!! Form::select('semester_id', $semesters, null, ['class' => 'form-control']) !!}
-            @error('semester_id')
+            @error('semester_id')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
@@ -45,8 +45,8 @@
         <div class="col-lg-6">
             <label for="section">Section</label>
             {!! Form::select('section_id', $sections,null, ['class' => 'form-control']) !!}
-            @error('section_id')
-            {{ $message }}
+            @error('section_id')  <p style="color:red" >
+                {{ $message }}</p>
             @enderror
         </div>
     </div>
@@ -54,7 +54,7 @@
         <div class="col-lg-6">
             <label for="phone">Phone</label>
             {!! Form::text('user[number]', null, ['class' => 'form-control']) !!}
-            @error('user.number')
+            @error('user.number')  <p style="color:red" >
             {{ $message }}
             @enderror
         </div>

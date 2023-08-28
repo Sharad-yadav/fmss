@@ -4,6 +4,7 @@
             <label for="batch_year">Batch</label>
             {!! Form::text('batch_year',$batches->batch_year ?? null, ['class' => 'form-control']) !!}
             @error('batch_year')
+            <p style="color:red" >
             {{ $message }}
             @enderror
         </div>
