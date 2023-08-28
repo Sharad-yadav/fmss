@@ -22,11 +22,11 @@
                     <th>#</th>
                     <th>Batch</th>
                     <th>Faculty</th>
-                    <th>Teacher</th>
                     <th>Semester</th>
                     <th>Section</th>
                     <th>Subject</th>
                     <th>Assignments</th>
+                    <th>Submissions Count</th>
                     <th>Submission Date</th>
                     <th style="text-align: center">Actions</th>
                 </tr>
@@ -50,11 +50,11 @@
                     { data: 'id', name: 'id' },
                     {data: 'batch.batch_year', name: 'batch.batch_year'},
                     { data: 'section.semester.faculty.name', name: 'section.semester.faculty.name' },
-                    { data: 'teacher.user.name', name: 'teacher.user.name' },
                     {data: 'section.semester.name',name:'section.semester.name'},
                     { data: 'section.name', name: 'section.name' },
                     { data: 'subject.name', name: 'subject.name' },
                     {data: 'assignments', name: 'assignments'},
+                    { data: 'assignmentCount', name: 'assignmentCount' },
                     { data: 'submission_date', name: 'submission_date' },
                     { data: 'action', name: 'action', orderable: false, searchable: false },
                 ]

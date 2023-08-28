@@ -33,7 +33,7 @@
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <span class="kt-portlet__head-icon"></span>
-                <h3 class="kt-portlet__head-title">Assignment Listing</h3>
+                <h3 class="kt-portlet__head-title">Submissions Listing</h3>
             </div>
         </div>
 
@@ -47,9 +47,11 @@
                 <tbody>
                     @forelse($assignment->submissions as $submission)
                         <tr>
-                            <td>{{ $submission->name }}</td>
                             <td>
                                 <a href="{{ Illuminate\Support\Facades\Storage::url($submission->file) }}" target="_blank">{{ $submission->name }}</a>
+                            </td>
+                            <td>
+                                {{ $submission->created_at->format('M d, Y') }}
                             </td>
                             <td>
                                 <a href="{{ route('student.assignment.edit', $submission->id) }}" class="btn btn-sm btn-primary">

@@ -63,9 +63,10 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Assignment $id)
+    public function show(Assignment $assignment)
     {
-        //
+        $assignment = $assignment->load(['submissions.student.user', 'section.semester.faculty', 'subject']);
+        return view($this->view.'show', compact('assignment'));
     }
 
     /**
@@ -111,7 +112,7 @@ class AssignmentController extends Controller
     }
     public function datatable()
     {
-        $assignments= Assignment::query()->where('teacher_id', getAuthTeacher('id'))->with(['subject', 'section.semester.faculty', 'teacher.user','batch']);
+        $assignments= Assignment::query()->where('teacher_id', getAuthTeacher('id'))->with(['subject', 'section.semester.faculty', 'submissions','batch']);
         return DataTables::of($assignments)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -124,10 +125,13 @@ class AssignmentController extends Controller
                 ];
                 return view('backend.datatable.action', compact('params'));
             })
+            ->addColumn('assignmentCount', function($row) {
+                return '<a href="'. route('teacher.assignment.show', $row->id) .'">'. $row->submissions->count().'</a>' ;
+            })
             ->editColumn('assignments', function ($row) {
                 return '<a href="'. Storage::url($row->file) .'" target="_blank">'. $row->assignments .'</a>';
             })
-            ->rawColumns(['assignments', 'action'])
+            ->rawColumns(['assignments', 'action', 'assignmentCount'])
             ->make(true);
     }
 }
