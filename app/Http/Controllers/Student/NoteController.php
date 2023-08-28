@@ -19,12 +19,11 @@ class NoteController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        $notes = Notes::latest()->paginate(10);
         $title = 'Delete Note!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
-        return view($this->view . 'index', compact('notes'));
+        return view($this->view . 'index');
     }
 
     /**
@@ -77,7 +76,10 @@ class NoteController extends Controller
 
     public function datatable()
     {
-        $notes = Notes::query()->with('subject.semester.faculty');
+        $notes = Notes::whereHas('subject', function($query) {
+            $query->where('semester_id', getAuthStudent('semester_id'));
+        })->with('subject.semester.faculty');
+
         return DataTables::of($notes)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {

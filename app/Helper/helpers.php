@@ -45,6 +45,15 @@ function getAuthTeacher($attribute = null) {
     return $teacher;
 }
 
+function getAuthStudent($attribute = null) {
+    $user = frontUser()->load('student');
+    $student = $user->student;
+    if ($attribute) {
+        return $student->{$attribute};
+    }
+    return $student;
+}
+
 /**
  * admin User
  *

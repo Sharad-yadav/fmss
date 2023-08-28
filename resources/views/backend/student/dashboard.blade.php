@@ -177,8 +177,8 @@
                             </span>
                             @forelse($notes as $note)
                                 <span class="kt-widget__text kt-margin-t-0 kt-padding-t-5">
-                                    <a href="{{ \Illuminate\Support\Facades\Storage::url($note->file) }}">
-                                        {{ $note->notes }}
+                                    <a href="{{ \Illuminate\Support\Facades\Storage::url($note->notes) }}" target="_blank">
+                                        {{ $note->name }}
                                     </a>
                                 </span>
                             @empty
