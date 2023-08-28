@@ -16,7 +16,6 @@ class Assignment extends Model
     public function subject(): BelongsTo{
         return $this->belongsTo(Subject::class,'subject_id','id');
     }
-
     public function section(): BelongsTo{
         return $this->belongsTo(Section::class,'section_id','id');
     }

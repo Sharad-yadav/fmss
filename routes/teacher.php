@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Teacher\AssignmentController;
 use App\Http\Controllers\Teacher\LabDashController;
+use App\Models\Faculty;
+use App\Models\Section;
 use App\Models\Semester;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
@@ -26,8 +28,16 @@ Route::resource('student',StudentController::class);
 ROute::get('/dashboard',[\App\Http\Controllers\Teacher\LabDashController::class,'index']);
 
 
+Route::get('/all-faculties', function () {
+    return app(Faculty::class)->query()->select('id', 'name as text')->get();
+});
+
 Route::get('/faculty/{faculty}/semesters', function ($id) {
     return app(Semester::class)->query()->where(['faculty_id' => $id])->select('id', 'name as text')->get();
+});
+
+Route::get('semester/{semester}/sections', function ($id) {
+    return app(Section::class)->query()->where(['semester_id' => $id])->select('id', 'name as text')->get();
 });
 
 Route::get('semester/{semester}/subjects', function ($id) {

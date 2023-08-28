@@ -28,9 +28,9 @@ class AssignmentController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-
-
-
+        $title = 'Delete Assignment!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view($this->view . 'index');
     }
 
@@ -39,13 +39,9 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::pluck("name", "id");
-        $faculties = Faculty::pluck('name', "id");
-        $semesters = Semester::pluck('name', 'id');
         $batches = Batch::pluck('batch_year','id');
-        $sections = Section::pluck('name','id');
 
-        return view($this->view . 'create', compact('semesters', 'faculties', 'subjects','batches','sections'));
+        return view($this->view . 'create', compact('batches'));
     }
 
     /**
@@ -57,7 +53,7 @@ class AssignmentController extends Controller
         $user = frontUser()->load('teacher');
         $storeData['teacher_id'] = $user->teacher->id;
         if($file = $request->file('file')) {
-            $storeData['file'] = Storage::putFile('files/assignments/', $file);
+            $storeData['file'] = Storage::putFile('files/assignments', $file);
         }
         $assignments = Assignment::create($storeData);
 
@@ -67,7 +63,7 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Assignment $id)
     {
         //
     }
@@ -75,29 +71,47 @@ class AssignmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Assignment $assignment)
     {
-        //
+        $assignment= $assignment->load('subject.semester.faculty');
+        $batches = Batch::pluck('batch_year','id');
+
+        return view($this->view.'edit', compact('assignment', 'batches'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AssignmentRequest $request, string $id)
+    public function update(AssignmentRequest $request, Assignment $assignment)
     {
-        //
+        $updateData =  $request->all();
+        if($file = $request->file('file')) {
+            if (Storage::exists($assignment->file)) {
+                Storage::delete($assignment->file);
+            }
+            $updateData['file'] = Storage::putFile('files/assignments', $file);
+        }
+        $assignment->update($updateData);
+
+        return redirect()->route('teacher.assignment.index')->with('success', 'Notes uploaded successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Assignment $assignment)
     {
-        //
+        // delete file if already exists at the path.
+        if (Storage::exists($assignment->file)) {
+            Storage::delete($assignment->file);
+        }
+        $assignment->delete();
+
+        return redirect()->route('teacher.assignment.index');
     }
     public function datatable()
     {
-        $assignments= Assignment::query()->with(['subject', 'section.semester.faculty', 'teacher.user','batch']);
+        $assignments= Assignment::query()->where('teacher_id', getAuthTeacher('id'))->with(['subject', 'section.semester.faculty', 'teacher.user','batch']);
         return DataTables::of($assignments)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -106,7 +120,6 @@ class AssignmentController extends Controller
                     'is_delete' => true,
                     'is_show' => true,
                     'route' => 'teacher.assignment.',
-                    'url' => 'admin/assignment',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

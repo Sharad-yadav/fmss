@@ -8,11 +8,9 @@
         data-confirm-delete="true">
         <i class="la la-trash"></i>
     </a>
-
-
 @endif
 @if ($params['is_show'])
-    <a href="{{ url($params['url'], $params['row']->id) }}" class="edit-btn btn btn-primary btn-xs">
+    <a href="{{ route($params['route'].'show', $params['row']->id) }}" class="edit-btn btn btn-primary btn-xs">
         <i class="la la-eye"></i>
     </a>
 @endif

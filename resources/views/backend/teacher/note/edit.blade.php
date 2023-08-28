@@ -1,4 +1,7 @@
 @extends('backend.layouts.app')
+@push('style')
+    <link href="{{ asset('assets/admin/css') }}/select2.css" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
     <div class="kt-portlet">
         <div class="kt-portlet__head">
@@ -12,6 +15,7 @@
             'route' => ['teacher.note.update', $note->id],
             'method' => 'patch',
             'class' => 'kt-form kt-form--label-right',
+            'files' => true,
         ]) !!}
         @include('backend.teacher.note.form', ['formAction' => 'Update'])
 
@@ -19,15 +23,18 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        {{--$(document).ready(function () {--}}
-        {{--    var selectedFacultyId = @json($school->province_id ?? null);--}}
-        {{--    var selectedDistrictId = @json($school->district_id ?? null);--}}
-        {{--    var selectedDistrict = @json(getSelectedDistrict($school->district_id ?? null));--}}
-        {{--    var selectedMunicipality = @json(getSelectedMunicipality($school->municipality_id ?? null));--}}
-        {{--    getSemesterByFaculty(selectedProvinceId, selectedDistrict);--}}
-        {{--    getSubjectBySemester(selectedDistrictId, selectedMunicipality);--}}
-        {{--});--}}
-    </script>
+    <script src="{{ asset('assets/admin/js') }}/select2.full.js" type="text/javascript"></script>
     <script src="{{ asset('assets/teacher/js') }}/subject.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var selectedFacultyId = @json($note->subject->semester->faculty_id ?? null);
+            var selectedSemesterId = @json($note->subject->semester_id ?? null);
+            var selectedFaculty = @json(getSelectedFaculty($note->subject->semester->faculty_id ?? null));
+            var selectedSemester = @json(getSelectedSemester($note->subject->semester_id ?? null));
+            var selectedSubject = @json(getSelectedSubject($note->subject_id ?? null));
+            getFaculties(selectedFaculty)
+            getSemesterByFaculty(selectedFacultyId, selectedSemester);
+            getSubjectBySemester(selectedSemesterId, selectedSubject);
+        });
+    </script>
 @endpush

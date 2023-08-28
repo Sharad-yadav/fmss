@@ -24,12 +24,11 @@ class NoteController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        $notes = Notes::latest()->paginate(10);
         $title = 'Delete Note!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
-        return view($this->view . 'index',compact('notes'));
+        return view($this->view . 'index');
     }
 
     /**
@@ -37,9 +36,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $faculties = Faculty::pluck('name', "id");
-
-        return view($this->view . 'create', compact('faculties'));
+        return view($this->view . 'create');
     }
 
     /**
@@ -50,7 +47,7 @@ class NoteController extends Controller
         $storeData =  $request->all();
         $storeData['user_id'] = frontUser('id');
         if($file = $request->file('note')) {
-            $storeData['notes'] = Storage::putFile('files/notes/', $file);
+            $storeData['notes'] = Storage::putFile('files/notes', $file);
         }
         $notes = Notes::create($storeData);
 
@@ -61,43 +58,55 @@ class NoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Notes $note)
     {
-        //
+       return view($this->view.'show', compact('note'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Notes $note)
     {
-        //
+        $note= $note->load('subject.semester.faculty');
+
+        return view($this->view.'edit', compact('note'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(NoteRequest $request, string $id)
+    public function update(NoteRequest $request, Notes $note)
     {
-        //
+        $updateData =  $request->all();
+        if($file = $request->file('note')) {
+            if (Storage::exists($note->notes)) {
+                Storage::delete($note->notes);
+            }
+            $updateData['notes'] = Storage::putFile('files/notes', $file);
+        }
+        $note->update($updateData);
+
+        return redirect()->route('teacher.note.index')->with('success', 'Notes uploaded successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Notes $note)
     {
-        $note= Notes::findOrFail($id);
-        DB::beginTransaction();
-        $note->user()->delete();
+        // delete file if already exists at the path.
+        if (Storage::exists($note->notes)) {
+            Storage::delete($note->notes);
+        }
         $note->delete();
-        DB::commit();
+
         return redirect()->route('teacher.note.index');
     }
 
     public function datatable()
     {
-        $notes = Notes::query()->with('subject.semester.faculty');
+        $notes = Notes::where('user_id', frontUser('id'))->with('subject.semester.faculty');
         return DataTables::of($notes)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
