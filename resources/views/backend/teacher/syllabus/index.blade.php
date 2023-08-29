@@ -19,7 +19,7 @@
                 <tr>
                     <th>#</th>
 
-                    
+
                     <th>Semester</th>
                     <th>Subject</th>
                     <th>Name</th>
