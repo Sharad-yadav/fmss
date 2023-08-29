@@ -2,8 +2,6 @@
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="leave type">Leave Type</label>
-            {!! Form::select('leave_type',$leaves ,null, ['class' => 'form-control ']) !!}
-            @error('leave_type')  <p style="color:red" >
             {!! Form::select('leave_type_id',$leaves ,null, ['class' => 'form-control ']) !!}
             @error('leave_type_id')
             {{ $message }}
@@ -19,13 +17,6 @@
     </div>
     <div class="form-group row">
 
-     <div class="col-lg-6">
-        <label for="leave"> Leave Upload</label>
-        {!! Form::file('file', ['class' => 'form-control']) !!}
-        @error('file')  <p style="color:red" >
-        {{ $message }}
-        @enderror
-     </div>
         <div class="col-lg-12">
             <label for="leave type">Description</label>
             {!! Form::textarea('description',null, ['class' => 'form-control ']) !!}
