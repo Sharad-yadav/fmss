@@ -105,9 +105,49 @@ class RouteConstant
     const TeacherNote =[
         'teacher.note.create',
         'teacher.note.index',
-        'teacher.note.index',
+        'teacher.note.edit',
         'teacher.note.show',
     ];
+    const TeacherSyllabus =[
+        'teacher.syllabus.index',
+        'teacher.syllabus.create',
+        'teacher.syllabus.edit',
+        'teacher.syllabus.show',
+    ];
+    const TeacherStudent =[
+        'teacher.student.index',
+        'teacher.student.show',
+    ];
+    const TeacherTeacher=[
+        'teacher.teacher.index',
+        'teacher.teacher.show',
+    ];
+const StudentDashboard =['student.dashboard'];
+const StudentNote = [
+    'student.note.index',
+
+];
+const StudentLeave =[
+    'student.leave.index',
+    'student.leave.create',
+    'student.leave.show',
+    'student.leave.edit',
+];
+const StudentNotice =[
+    'student.notice.index',
+];
+const StudentRoutine =[
+    'student.routine.index',
+
+];
+const StudentSyllabus =[
+    'student.syllabus.index',
+];
+const StudentAssignment =[
+    'student.assignment.index',
+    'student.assignment.show',
+    'student.assignment.edit',
+];
 
 
 }

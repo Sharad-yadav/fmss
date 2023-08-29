@@ -20,8 +20,8 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>File</th>
-                    <th>Posted For</th>
-                    <th style="text-align: center">Actions</th>
+
+                    <th style="text-align: center">Posted For</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@
                     {data: 'name', name: 'name'},
                     { data: 'file', name: 'file' },
                     {data: 'for', name: 'for'},
-                    { data: 'action', name: 'action', orderable: false, searchable: false },
+                    // { data: 'action', name: 'action', orderable: false, searchable: false },
                 ]
             });
         });
