@@ -41,13 +41,10 @@ class StudentController extends Controller
 
     public function create()
     {
-        $faculties = Faculty::all()->pluck('name', 'id');
-        $semesters = Semester::all()->pluck('semester', 'id');
-        $sections = Section::all()->pluck('name', 'id');
         $batches = Batch::all()->pluck('batch_year', 'id');
         $users = User::all()->pluck('name', 'id');
 
-        return view($this->view . 'create', compact('faculties', 'semesters', 'sections', 'batches', 'users'));
+        return view($this->view . 'create', compact('batches', 'users'));
     }
 
     public function store(StudentRequest $request)
@@ -76,13 +73,10 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         $student = Student::findOrFail($id)->load(['user', 'faculty', 'batch', 'semester', 'section']);
-        $faculties = Faculty::all()->pluck('name', 'id');
-        $semesters = Semester::all()->pluck('name', 'id');
-        $sections = Section::all()->pluck('name', 'id');
-        $batches = Batch::all()->pluck('batch_year', 'id');
+         $batches = Batch::all()->pluck('batch_year', 'id');
         $users = User::all()->pluck('name', 'id');
 
-        return view($this->view . 'edit', compact('student', 'faculties', 'semesters', 'sections', 'batches', 'users'));
+        return view($this->view . 'edit', compact('student','batches', 'users'));
     }
 
     public function update(StudentRequest $request, string $id)

@@ -10,7 +10,7 @@
         </div>
         <div class="col-lg-6">
             <label for="semester">Semester</label>
-            {!! Form::select('semester_id',$semesters ,null, ['class' => 'form-control ']) !!}
+            {!! Form::select('semester_id',$semesters ,null, ['class' => 'form-control', 'id' => 'semester']) !!}
             @error('semester_id')  <p style="color:red" >
             {{ $message }}
             @enderror
@@ -20,7 +20,7 @@
     <div class="form-group row">
         <div class="col-lg-6">
             <label for="section">Section</label>
-            {!! Form::select('section_id',$sections ,null, ['class' => 'form-control ']) !!}
+            {!! Form::select('section_id',[] ,null, ['class' => 'form-control', 'id' => 'section']) !!}
             @error('section_id')  <p style="color:red" >
             {{ $message }}
             @enderror

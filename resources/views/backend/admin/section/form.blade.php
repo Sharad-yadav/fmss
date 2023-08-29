@@ -1,6 +1,5 @@
 <div class="kt-portlet__body">
     <div class="form-group row">
-
         <div class="col-lg-6">
             <label for="semester">Semester</label>
             {!! Form::select('semester_id',$semesters, null, ['class' => 'form-control']) !!}
