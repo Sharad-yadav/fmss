@@ -22,5 +22,5 @@ Route::resource('syllabus',\App\Http\Controllers\Student\SyllabusController::cla
 
 
 
-Route::get('password-change', 'ProfileController@changePasswordShow')->name('password.change');
-Route::post('password-change', 'ProfileController@changePassword')->name('password.change');
+Route::get('password-change', [ProfileController::class, 'changePasswordShow'])->name('password.change');
+Route::post('password-change', [ProfileController::class, 'changePassword'])->name('password.change');
