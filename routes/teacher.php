@@ -30,6 +30,6 @@ Route::resource('teacher',\App\Http\Controllers\Teacher\TeacherController::class
 //LabAssistant Route
 ROute::get('/dash',[\App\Http\Controllers\Teacher\LabDashController::class,'index']);
 
-Route::get('password-change', 'ProfileController@changePasswordShow')->name('password.change');
-Route::post('password-change', 'ProfileController@changePassword')->name('password.change');
+Route::get('password-change', [ProfileController::class, 'changePasswordShow'])->name('password.change');
+Route::post('password-change', [ProfileController::class, 'changePassword'])->name('password.change');
 
