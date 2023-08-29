@@ -31,7 +31,7 @@
             </li>
 
             <li class="kt-menu__item {{ getActiveClass(\App\Constants\RouteConstant::TeacherNotice) }}" aria-haspopup="true">
-                <a href="{{ route('admin.semester.index') }}" class="kt-menu__link ">
+                <a href="{{ route('teacher.notice.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-list-ul">
                         </i>
@@ -39,7 +39,7 @@
                     <span class="kt-menu__link-text">Notice</span>
                 </a>
             </li>
-            <li class="kt-menu__item " aria-haspopup="true">
+            <li class="kt-menu__item {{ getActiveClass(\App\Constants\RouteConstant::TeacherLeave) }}" aria-haspopup="true">
                 <a href="{{ route('teacher.leave.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-align-justify">
@@ -58,7 +58,7 @@
                 </a>
 
             </li>
-            <li class="kt-menu__item   " aria-haspopup="true">
+            <li class="kt-menu__item  {{ getActiveClass(\App\Constants\RouteConstant::TeacherSyllabus) }} " aria-haspopup="true">
                 <a href="{{ route('teacher.syllabus.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-book">

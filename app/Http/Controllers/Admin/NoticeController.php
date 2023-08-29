@@ -66,15 +66,31 @@ class NoticeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $notice = Notice::findOrFail($id);
+        $notices = collect(NoticeConstant::NOTICE_FOR)->pluck('name', 'id');
+
+        return view($this->view . 'edit', compact('notice', 'notices'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(NoticeRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        //
+        $notice = Notice::findOrFail($id);
+
+        $updateData = $request->all();
+        if ($file = $request->file('file')) {
+            // Delete the old file if it exists
+            if ($notice->file && Storage::exists($notice->file)) {
+                Storage::delete($notice->file);
+            }
+            $updateData['file'] = Storage::putFile('files/notices/', $file);
+        }
+
+        $notice->update($updateData);
+
+        return redirect()->route('admin.notice.index')->with('success', 'Notice updated successfully.');
     }
 
     /**
@@ -82,7 +98,15 @@ class NoticeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $notice = Notice::findOrFail($id);
+
+        if ($notice->file && Storage::exists($notice->file)) {
+            Storage::delete($notice->file);
+        }
+
+        $notice->delete();
+
+        return redirect()->route('admin.notice.index')->with('success', 'Notice deleted successfully.');
     }
     public function datatable()
     {

@@ -81,9 +81,9 @@ class NoticeController extends Controller
                 $params = [
                     'is_edit' => false,
                     'is_delete' => false,
-                    'is_show' => true,
+                    'is_show' => false,
                     'route' => 'teacher.notice.',
-                    'url' => 'admin/notice',
+                    'url' => 'teacher/notice',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));
