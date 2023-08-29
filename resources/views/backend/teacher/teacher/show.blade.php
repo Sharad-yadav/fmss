@@ -5,7 +5,7 @@
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <span class="kt-portlet__head-icon"></span>
-                <h3 class="kt-portlet__head-title">My Details</h3>
+                <h3 class="kt-portlet__head-title">Teacher Details</h3>
             </div>
         </div>
         <div class="kt-portlet__body">
@@ -21,12 +21,14 @@
                     <p class="form-control-static">{{ $teacher->user->email }}</p>
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-lg-2 col-form-label">Faculty:</label>
+                <label class="col-lg-2 col-form-label">Phone:</label>
                 <div class="col-lg-10">
-                    <p class="form-control-static">{{ $teacher->faculty->name }}</p>
+                    <p class="form-control-static">{{ $teacher->user->number }}</p>
                 </div>
             </div>
+
             <!-- Add other teacher details here -->
         </div>
     </div>

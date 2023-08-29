@@ -2,108 +2,106 @@
 
 namespace App\Http\Controllers\Teacher;
 
-use App\Models\Role;
 use App\Models\User;
+use App\Models\Faculty;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use App\Constants\RoleConstant;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TeacherRequest;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class TeacherController extends Controller
 {
     private $view = 'backend.teacher.teacher.';
-
     /**
      * Display a listing of the resource.
      */
-public function index()
-{
-    $roles = Role::all()->pluck('name', 'id');
-    $teachers = User::all(); // Retrieve all teachers here (or use the appropriate query)
+    public function index(Request $request)
+    {
 
-    // Pass the $teachers variable to the view
-    return view('backend.teacher.teacher.show', compact('teachers', 'roles'));
-}
+        if ($request->wantsJson()) {
+            return $this->datatable();
+        }
+
+
+        return view($this->view . 'index');
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      */
-public function show(string $id)
-{
-    $roles = Role::all()->pluck('name', 'id');
-    $teacher = Teacher::find($id); // Use the Teacher model to find the teacher
+    public function show(string $id)
+    {
+        $teacher = Teacher::findOrFail($id)->load(['user', 'faculty']);
 
-    if (!$teacher) {
-        // Handle the case where the teacher is not found
-        abort(404);
+        return view($this->view . 'show', compact('teacher'));
     }
-
-    // Pass the $teacher variable to the view
-    return view('backend.teacher.teacher.show', compact('teacher', 'roles'));
-}
-
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $teacher = Teacher::findOrFail($id)->load(['user', 'faculty']);
+        $faculties = Faculty::all()->pluck('name', 'id');
+
+        return view($this->view . 'edit', compact('teacher', 'faculties'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Teacher $teacher)
-{
-    $data = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|min:3',
-        // 'role'=>'required|min:3',
-        'number'=>'required|min:3',
-        'password'=>'required|min:3',
-        // Add more validation rules for other fields if needed
-    ]);
+    public function update(TeacherRequest $request, string $id)
+    {
 
-    $teacher->update($data);
-
-    return redirect()->route('teacher.show', $teacher->id)->with('success', 'Your information updated successfully.');
-}
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        DB::beginTransaction();
+        $teacher->user()->delete();
+        $teacher->delete();
+        DB::commit();
+
+        return redirect()->route('admin.teacher.index')->with('success', 'user is deleted successfully');
     }
-    public function datatable()
+
+    public function dataTable()
     {
-        $teachers = Teacher::query()->with('faculty');
-        return DataTables::of($teachers)
+        $teacher = Teacher::query()->where('faculty_id', getAuthTeacher('faculty_id'))->with(['user', 'faculty']);
+        return Datatables::of($teacher)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $params = [
-                    'is_edit' => true,
-                    'is_delete' => true,
+                    'is_edit' => false,
+                    'is_delete' => false,
                     'is_show' => true,
                     'route' => 'teacher.teacher.',
+                    'url' => 'teacher/teacher',
                     'row' => $row
                 ];
                 return view('backend.datatable.action', compact('params'));

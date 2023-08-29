@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('teacher.routine.index') }}" class="kt-menu__link ">
+                <a href="{{ route('teacher.student.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-list-ul">
                         </i>
@@ -61,17 +61,9 @@
                     <span class="kt-menu__link-text"> View Student</span>
                 </a>
             </li>
+          
             <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('teacher.routine.index') }}" class="kt-menu__link ">
-                    <span class="kt-menu__link-icon">
-                        <i class="la la-list-ul">
-                        </i>
-                    </span>
-                    <span class="kt-menu__link-text"> View Batches</span>
-                </a>
-            </li>
-            <li class="kt-menu__item " aria-haspopup="true">
-                <a href="{{ route('teacher.routine.index') }}" class="kt-menu__link ">
+                <a href="{{ route('teacher.teacher.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
                         <i class="la la-list-ul">
                         </i>
@@ -88,6 +80,7 @@
                     <span class="kt-menu__link-text"> Routine</span>
                 </a>
             </li>
+
             <li class="kt-menu__item " aria-haspopup="true">
                 <a href="{{ route('teacher.syllabus.index') }}" class="kt-menu__link ">
                     <span class="kt-menu__link-icon">
@@ -99,14 +92,6 @@
             </li>
 
 
-{{--            <li class="kt-menu__item " aria-haspopup="true">--}}
-{{--                <a href="{{ getProfileRoute() }}" class="kt-menu__link ">--}}
-{{--                    <span class="kt-menu__link-icon">--}}
-{{--                        <i class="la la-gear">--}}
-{{--                        </i>--}}
-{{--                    </span>--}}
-{{--                    <span class="kt-menu__link-text">Settings</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+
     </div>
 </div>

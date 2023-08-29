@@ -23,6 +23,9 @@ Route::resource('leave',\App\Http\Controllers\Teacher\LeaveController::class);
 Route::resource('routine',\App\Http\Controllers\Teacher\RoutineController::class);
 Route::resource('notice',\App\Http\Controllers\Teacher\NoticeController::class);
 Route::resource('syllabus',\App\Http\Controllers\Teacher\SyllabusController::class);
+Route::resource('student',\App\Http\Controllers\Teacher\StudentController::class);
+Route::resource('teacher',\App\Http\Controllers\Teacher\TeacherController::class);
+
 
 //LabAssistant Route
 ROute::get('/dash',[\App\Http\Controllers\Teacher\LabDashController::class,'index']);
