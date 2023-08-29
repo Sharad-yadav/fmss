@@ -19,7 +19,7 @@
 
 @push('scripts')
     <script src="{{ asset('assets/admin/js') }}/select2.full.js" type="text/javascript"></script>
-    <script src="{{ asset('assets/teacher/js') }}/subject.js" type="text/javascript"></script>
+    <script src="{{ asset('assets/js') }}/subject.js" type="text/javascript"></script>
     <script>
         $(document).ready(function() {
             getFaculties();

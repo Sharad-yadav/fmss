@@ -34,9 +34,9 @@ class RoutineController extends Controller
     public function create()
     {
         $batches =Batch::pluck('batch_year','id');
-        $semesters = Semester::pluck('name','id');
-        $sections = Section::pluck('name','id');
-        return view($this->view . 'create', compact('batches','semesters','sections'));
+        $semesters = Semester::where('faculty_id', getAuthTeacher('faculty_id'))->pluck('name','id');
+
+        return view($this->view . 'create', compact('batches','semesters'));
     }
 
 
@@ -70,10 +70,9 @@ class RoutineController extends Controller
     {
         $routine = $routine->load('semester','batch','section');
         $batches = Batch::pluck('batch_year','id');
-        $semesters = Semester::pluck('name','id');
-        $sections = Section::pluck('name','id');
+        $semesters = Semester::where('faculty_id', getAuthTeacher('faculty_id'))->pluck('name','id');
 
-        return view($this->view.'edit', compact('semesters', 'batches','sections','routine'));
+        return view($this->view.'edit', compact('semesters', 'batches', 'routine'));
     }
 
     /**

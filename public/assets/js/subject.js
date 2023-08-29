@@ -32,7 +32,7 @@ function getFaculties(defaultSelected = null) {
         placeholder: 'Select Faculty',
         allowClear: true,
         ajax: {
-            url: "/teacher/all-faculties",
+            url: "/general/all-faculties",
             dataType: 'json',
             processResults: function (data) {
                 return {
@@ -61,7 +61,7 @@ function getSemesterByFaculty(facultyId, defaultSelected = null) {
         placeholder: 'Select Semester',
         allowClear: true,
         ajax: {
-            url: "/teacher/faculty/" + facultyId + '/semesters',
+            url: "/general/faculty/" + facultyId + '/semesters',
             dataType: 'json',
             processResults: function (data) {
                 return {
@@ -91,7 +91,7 @@ function getSectionBySemester(semesterId, defaultSelected = null) {
         placeholder: 'Select Section',
         allowClear: true,
         ajax: {
-            url: "/teacher/semester/" + semesterId + '/sections',
+            url: "/general/semester/" + semesterId + '/sections',
             'dataType': 'json',
             processResults: function (data) {
                 return {
@@ -120,7 +120,7 @@ function getSubjectBySemester(semesterId, defaultSelected = null) {
         placeholder: 'Select Subject',
         allowClear: true,
         ajax: {
-            url: "/teacher/semester/" + semesterId + '/subjects',
+            url: "/general/semester/" + semesterId + '/subjects',
             'dataType': 'json',
             processResults: function (data) {
                 return {

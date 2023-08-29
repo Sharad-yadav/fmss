@@ -24,7 +24,7 @@ class SyllabusController extends Controller
         if ($request->wantsJson()) {
             return $this->datatable();
         }
-        $title = 'Delete Note!';
+        $title = 'Delete Syllabus!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
@@ -36,12 +36,9 @@ class SyllabusController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::pluck('name', "id");
         $batches = Batch::pluck('batch_year','id');
-        $faculties = Faculty::pluck('name','id');
-        $semesters = Semester::all()->pluck('semester','id');
 
-        return view($this->view . 'create', compact('subjects','batches','faculties','semesters'));
+        return view($this->view . 'create', compact('batches'));
     }
 
     /**
@@ -73,26 +70,27 @@ class SyllabusController extends Controller
     public function edit(string $id)
     {
         $syllabus = Syllabus::findOrFail($id);
+        $batches = Batch::pluck('batch_year','id');
 
-
-        $subjects = Subject::pluck('name', 'id');
-
-        return view($this->view . 'edit', compact('syllabus', 'subjects'));
+        return view($this->view . 'edit', compact('syllabus', 'batches'));
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(SyllabusRequest $request, string $id)
+    public function update(SyllabusRequest $request, Syllabus $syllabus)
     {
-
-        $syllabus = Syllabus::findOrFail($id);
-        if ($file = $request->file('file')) {
-            Storage::delete($syllabus->file);
-            $newFilePath = Storage::putFile('files/syllabus/', $file);
-            $syllabus->update(['file' => $newFilePath]);
+        $updateData =  $request->all();
+        if($file = $request->file('file')) {
+            if (!is_null($syllabus->file) && Storage::exists($syllabus->file)) {
+                Storage::delete($syllabus->file);
+            }
+            $updateData['file'] = Storage::putFile('files/assignments', $file);
         }
+        $syllabus->update($updateData);
+
+        return redirect()->route('admin.syllabus.index')->with('success', 'Syllabus updated successfully.');
     }
 
     /**
